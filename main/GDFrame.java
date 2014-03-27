@@ -3,29 +3,23 @@ package main;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Toolkit;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class GDFrame extends Frame implements Runnable {
 
 	private static final long serialVersionUID = 1L;
-	private Thread thread;
-	private double screenMultiplier = .8;
-	private int height = (int) (screenMultiplier * Toolkit.getDefaultToolkit().getScreenSize().getHeight());
+
+	private double screenMultiplier = .7;
 	private int width = (int) (screenMultiplier * Toolkit.getDefaultToolkit().getScreenSize().getWidth());
+	private int height = width * 9 / 16;
 	private GDScreen currentScreen;
+	private Thread thread;
 
 	public GDFrame() {
 		setLocation((int) ((Toolkit.getDefaultToolkit().getScreenSize().getWidth() - width) / 2),
 					(int) ((Toolkit.getDefaultToolkit().getScreenSize().getHeight() - height) / 2));
-		setSize(new Dimension(width, height));
+		setSize(new Dimension(width+1, height+1));
 		setResizable(false);
-		setTitle("Grid Defense");
-		addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent we) {
-				System.exit(0);
-			}
-		});
+		setUndecorated(true);
 		thread = new Thread(this);
 		setVisible(true);
 		createBufferStrategy(3);

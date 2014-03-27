@@ -1,44 +1,48 @@
 package main;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
-public class GameScreen extends GDScreen{
+public class GameScreen extends GDScreen {
+	
+	private Grid grid;
 
 	public GameScreen(GDFrame frame) {
 		super(frame);
+		grid = new Grid(this);
 	}
 
 	public void tick() {
-				
+
 	}
-	
+
 	public void draw() {
-		getG().setColor(Color.LIGHT_GRAY);
-		getG().fillRect(0, 0, getWidth(), getHeight());
-		getG().setColor(Color.blue);
-		getG().fillRect(500, 500, 500, 500);
+		Graphics g = getFrame().getBufferStrategy().getDrawGraphics();
+		g.setColor(new Color(240, 240, 240));
+		g.fillRect(0, 0, getWidth(), getHeight());
+		g.setColor(Color.blue);
+		grid.draw(g);
 	}
-	
+
 	public void mouseClicked(MouseEvent e) {
 		getFrame().switchScreen(new StartScreen(getFrame()));
-		System.out.println("Clicked on GameScreen");
 	}
 
 	public void mouseEntered(MouseEvent e) {
-		
+
 	}
 
 	public void mouseExited(MouseEvent e) {
-		
+
 	}
 
 	public void mousePressed(MouseEvent e) {
-		
+
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		
+
 	}
 
 }

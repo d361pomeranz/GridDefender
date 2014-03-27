@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
 public class StartScreen extends GDScreen{
@@ -14,15 +15,15 @@ public class StartScreen extends GDScreen{
 	}
 
 	public void draw() {
-		getG().setColor(Color.LIGHT_GRAY);
-		getG().fillRect(0, 0, getWidth(), getHeight());
-		getG().setColor(Color.red);
-		getG().fillRect(50, 50, 50, 50);
+		Graphics g = getFrame().getBufferStrategy().getDrawGraphics();
+		g.setColor(Color.LIGHT_GRAY);
+		g.fillRect(0, 0, getWidth(), getHeight());
+		g.setColor(Color.red);
+		g.drawString("You are on the Start Screen", 500, 400);
 	}
 
 	public void mouseClicked(MouseEvent e) {
 		getFrame().switchScreen(new GameScreen(getFrame()));
-		System.out.println("Clicked on StartScreen");
 	}
 
 	public void mouseEntered(MouseEvent e) {
