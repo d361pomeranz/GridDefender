@@ -29,7 +29,7 @@ public class StartScreen extends GDScreen{
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		getFrame().switchScreen(new GameScreen(getFrame()));
+		getFrame().switchScreen(new GameScreen(getFrame(), new Player()));
 	}
 
 	public void mouseEntered(MouseEvent e) {

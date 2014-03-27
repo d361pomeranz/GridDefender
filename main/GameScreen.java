@@ -7,14 +7,20 @@ import java.awt.event.MouseEvent;
 public class GameScreen extends GDScreen {
 	
 	private Grid grid;
+	private Player player;
 
-	public GameScreen(GDFrame frame) {
+	public GameScreen(GDFrame frame, Player player) {
 		super(frame);
+		this.player = player;
 		grid = new Grid(this);
 	}
 
 	public void tick() {
 
+	}
+	
+	public Player getPlayer() {
+		return player;
 	}
 
 	public void draw() {
