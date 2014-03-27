@@ -22,6 +22,7 @@ public class Button{
 		g.setColor(Color.black);
 		g.fillRect(x, y, width, height);
 		g.setColor(Color.green);
+		g.setFont(new Font("Times New Roman",Font.PLAIN,height/2));
 		g.drawString(text,x+2,y+height/2);
 	}
 	public boolean onButton(Point p){
