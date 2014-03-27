@@ -8,7 +8,7 @@ public class GDFrame extends Frame implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 
-	private double screenMultiplier = .7;
+	private double screenMultiplier = .9;
 	private int width = (int) (screenMultiplier * Toolkit.getDefaultToolkit().getScreenSize().getWidth());
 	private int height = width * 9 / 16;
 	private GDScreen currentScreen;
@@ -17,7 +17,7 @@ public class GDFrame extends Frame implements Runnable {
 	public GDFrame() {
 		setLocation((int) ((Toolkit.getDefaultToolkit().getScreenSize().getWidth() - width) / 2),
 					(int) ((Toolkit.getDefaultToolkit().getScreenSize().getHeight() - height) / 2));
-		setSize(new Dimension(width+1, height+1));
+		setSize(new Dimension(width + 1, height + 1));
 		setResizable(false);
 		setUndecorated(true);
 		thread = new Thread(this);

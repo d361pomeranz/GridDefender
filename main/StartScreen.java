@@ -4,14 +4,14 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
-public class StartScreen extends GDScreen{
+public class StartScreen extends GDScreen {
 
 	public StartScreen(GDFrame frame) {
 		super(frame);
 	}
 
 	public void tick() {
-		
+
 	}
 
 	public void draw() {
@@ -23,23 +23,23 @@ public class StartScreen extends GDScreen{
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		getFrame().switchScreen(new GameScreen(getFrame()));
+		getFrame().switchScreen(new GameScreen(getFrame(), new Player()));
 	}
 
 	public void mouseEntered(MouseEvent e) {
-		
+
 	}
 
 	public void mouseExited(MouseEvent e) {
-		
+
 	}
 
 	public void mousePressed(MouseEvent e) {
-		
+
 	}
 
 	public void mouseReleased(MouseEvent e) {
-	
+
 	}
 
 }

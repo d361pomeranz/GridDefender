@@ -7,8 +7,9 @@ import java.awt.event.MouseEvent;
 public class GameScreen extends GDScreen {
 	
 	private Grid grid;
+	private Player player;
 
-	public GameScreen(GDFrame frame) {
+	public GameScreen(GDFrame frame, Player player) {
 		super(frame);
 		grid = new Grid(this);
 	}
@@ -23,6 +24,10 @@ public class GameScreen extends GDScreen {
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(Color.blue);
 		grid.draw(g);
+	}
+	
+	public Player getPlayer() {
+		return player;
 	}
 
 	public void mouseClicked(MouseEvent e) {
@@ -44,5 +49,7 @@ public class GameScreen extends GDScreen {
 	public void mouseReleased(MouseEvent e) {
 
 	}
+
+	
 
 }
