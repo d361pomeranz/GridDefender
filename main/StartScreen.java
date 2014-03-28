@@ -25,7 +25,6 @@ public class StartScreen extends GDScreen{
 		//g.drawString("You are on the Start Screen", 500, 400);
 		newGameButton.draw(g);
 		loadGameButton.draw(g);
-		
 	}
 
 	public void mouseClicked(MouseEvent e) {

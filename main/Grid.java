@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.Graphics;
+import java.awt.Point;
 
 public class Grid {
 
@@ -19,6 +20,13 @@ public class Grid {
 			g.drawLine(x*sideLength, 0, x*sideLength, sideLength*yBoxes);
 		for (int y = 0; y <= yBoxes; y++)
 			g.drawLine(0, y*sideLength, sideLength*xBoxes, y*sideLength);
+	}
+	
+	public Point getBox(Point p){
+		gameScreen.getHeight();
+		
+		
+		return p;
 	}
 
 }
