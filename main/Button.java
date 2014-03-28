@@ -22,8 +22,8 @@ public class Button{
 		g.setColor(Color.black);
 		g.fillRect(x, y, width, height);
 		g.setColor(Color.green);
-		g.setFont(new Font("Times New Roman",Font.PLAIN,height/2));
-		g.drawString(text,x+2,y+height/2);
+		g.setFont(new Font("Times New Roman",Font.PLAIN,height-10));
+		g.drawString(text,x+2,y+height-5);
 	}
 	public boolean onButton(Point p){
 		if(p.getX()>=x&&p.getX()<x+width&&p.getY()>=y&&p.getY()<y+height){

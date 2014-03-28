@@ -29,7 +29,6 @@ public class GDFrame extends Frame implements Runnable {
 	}
 
 	public void run() {
-		System.out.println("Mother Fucker");
 		while (true) {
 			tick();
 			draw();
@@ -42,7 +41,6 @@ public class GDFrame extends Frame implements Runnable {
 	}
 
 	private void draw() {
-		System.out.println("Mother Fucker");
 		currentScreen.draw();
 	}
 	
