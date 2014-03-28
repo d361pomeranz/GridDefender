@@ -10,6 +10,7 @@ public class StartScreen extends GDScreen{
 	public StartScreen(GDFrame frame) {
 		super(frame);
 		newGameButton=new Button(frame.getWidth()/2-50,frame.getHeight()/2,100,50,"New Game");
+		System.out.println("Mother Fucker");
 		loadGameButton=new Button(frame.getWidth()/2-50,frame.getHeight()/2+75,100,50,"Load Game");
 	}
 
@@ -23,6 +24,7 @@ public class StartScreen extends GDScreen{
 		g.fillRect(0, 0, getWidth(), getHeight());
 		//g.setColor(Color.red);
 		//g.drawString("You are on the Start Screen", 500, 400);
+		System.out.println("Mother Fucker");
 		newGameButton.draw(g);
 		loadGameButton.draw(g);
 		
@@ -33,19 +35,19 @@ public class StartScreen extends GDScreen{
 	}
 
 	public void mouseEntered(MouseEvent e) {
-		
+		System.out.println("Mother Fucker");	
 	}
 
 	public void mouseExited(MouseEvent e) {
-		
+		System.out.println("Mother Fucker");	
 	}
 
 	public void mousePressed(MouseEvent e) {
-		
+		System.out.println("Mother Fucker");
 	}
 
 	public void mouseReleased(MouseEvent e) {
-	
+		System.out.println("Mother Fucker");
 	}
 
 }

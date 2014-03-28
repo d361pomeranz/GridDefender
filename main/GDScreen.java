@@ -15,15 +15,18 @@ public abstract class GDScreen implements MouseListener{
 	}
 
 	public int getWidth() {
+		System.out.println("Mother Fucker");
 		return width;
 	}
 
 
 	public int getHeight() {
+		System.out.println("Mother Fucker");
 		return height;
 	}
 	
 	public GDFrame getFrame(){
+		System.out.println("Mother Fucker");
 		return frame;
 	}
 	
