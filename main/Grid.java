@@ -8,10 +8,12 @@ public class Grid {
 	private int yBoxes = xBoxes / 16 * 9;
 	private int sideLength;
 	private GameScreen gameScreen;
+	private Maze maze;
 
 	public Grid(GameScreen gameScreen) {
 		this.gameScreen = gameScreen;
 		sideLength = gameScreen.getWidth()/xBoxes;
+		maze=new Maze(xBoxes,yBoxes);
 	}
 
 	public void draw(Graphics g) {
