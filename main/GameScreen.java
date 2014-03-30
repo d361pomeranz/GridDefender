@@ -27,8 +27,8 @@ public class GameScreen extends GDScreen {
 		Graphics g = getFrame().getBufferStrategy().getDrawGraphics();
 		g.setColor(new Color(240, 240, 240));
 		g.fillRect(0, 0, getWidth(), getHeight());
-		g.setColor(Color.blue);
 		grid.draw(g);
+		
 	}
 
 	public void mouseClicked(MouseEvent e) {
