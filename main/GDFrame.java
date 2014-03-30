@@ -8,12 +8,12 @@ public class GDFrame extends Frame implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 
-	private double screenMultiplier = .9;
+	private double screenMultiplier = .7;
 	private int width = (int) (screenMultiplier * Toolkit.getDefaultToolkit().getScreenSize().getWidth());
 	private int height = width * 9 / 16;
 	private GDScreen currentScreen;
 	private Thread thread;
-	private int fps = 10;
+	private int fps = 30;
 	private long lastTime = System.currentTimeMillis();
 
 	public GDFrame() {
@@ -31,13 +31,10 @@ public class GDFrame extends Frame implements Runnable {
 	}
 
 	public void run() {
-		int i = 0;
 		while (true) {
 			long time = System.currentTimeMillis();
 			if ((time - lastTime) * fps > 1000) {
 				lastTime = time;
-				System.out.println(i);
-				i++;
 				tick();
 				draw();
 				getBufferStrategy().show();

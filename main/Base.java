@@ -15,6 +15,10 @@ public class Base {
 		health = 100;
 	}
 	
+	public void damage(int n){
+		health -= n;
+	}
+	
 	public void draw(Graphics g, int sideLength){
 		g.setColor(Color.red);
 		g.fillRect(sideLength * x + 8, sideLength * y + 8, sideLength - 14, sideLength - 14);

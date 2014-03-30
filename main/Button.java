@@ -8,6 +8,8 @@ public class Button {
 	private int x;
 	private int y;
 	private String text;
+	private Color bgColor = Color.black;
+	private Color textColor = Color.green;
 
 	Button(int nx, int ny, int w, int h, String t) {
 		x = nx;
@@ -20,11 +22,19 @@ public class Button {
 	public void tick() {
 
 	}
+	
+	public void setBGColor(Color c){
+		bgColor = c;
+	}
+	
+	public void setTextColor(Color c){
+		textColor = c;
+	}
 
 	public void draw(Graphics g) {
-		g.setColor(Color.black);
+		g.setColor(bgColor);
 		g.fillRect(x, y, width, height);
-		g.setColor(Color.green);
+		g.setColor(textColor);
 		g.setFont(new Font("Times New Roman", Font.PLAIN, height - 10));
 		g.drawString(text, x + 2, y + height - 5);
 	}
@@ -33,7 +43,6 @@ public class Button {
 		if (p.getX() >= x && p.getX() < x + width)
 			if (p.getY() >= y && p.getY() < y + height)
 				return true;
-		System.out.println(x + " " + y);
 		return false;
 	}
 

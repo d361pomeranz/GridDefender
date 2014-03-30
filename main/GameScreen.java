@@ -8,15 +8,19 @@ public class GameScreen extends GDScreen {
 	
 	private Grid grid;
 	private Player player;
+	private Button exitButton;
 
 	public GameScreen(GDFrame frame, Player player) {
 		super(frame);
 		this.player = player;
+		exitButton = new Button(frame.getWidth() - 30, 0, 30, 30, "X");
+		exitButton.setBGColor(Color.red);
+		exitButton.setTextColor(Color.white);
 		grid = new Grid(this);
 	}
 
 	public void tick() {
-
+		grid.tick();
 	}
 	
 	public Player getPlayer() {
@@ -28,10 +32,13 @@ public class GameScreen extends GDScreen {
 		g.setColor(new Color(240, 240, 240));
 		g.fillRect(0, 0, getWidth(), getHeight());
 		grid.draw(g);
+		exitButton.draw(g);
 		
 	}
 
 	public void mouseClicked(MouseEvent e) {
+		if (exitButton.onButton(getMouse()))
+			System.exit(0);
 		getFrame().switchScreen(new StartScreen(getFrame()));
 	}
 
