@@ -1,5 +1,8 @@
 package main;
 
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.MouseListener;
 
 public abstract class GDScreen implements MouseListener{
@@ -25,6 +28,12 @@ public abstract class GDScreen implements MouseListener{
 	
 	public GDFrame getFrame(){
 		return frame;
+	}
+	
+	public Point getMouse(){
+		Point p = new Point((int) (MouseInfo.getPointerInfo().getLocation().getX()-frame.getX()),
+				(int) (MouseInfo.getPointerInfo().getLocation().getY()-frame.getY()));
+		return p;
 	}
 	
 	public abstract void draw();
