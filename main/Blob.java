@@ -11,6 +11,7 @@ public class Blob {
 	private int y;
 	private Grid grid;
 	private boolean human;
+	private int direction;
 
 	public Blob(int h, int s, Grid grid, boolean computer) {
 		health = h;
@@ -23,6 +24,7 @@ public class Blob {
 			y = grid.getHBase().getY() * grid.sideLength() + grid.sideLength()
 					/ 2;
 		} else {
+			direction = 2;
 			x = grid.getCBase().getX() * grid.sideLength() + grid.sideLength()
 					/ 2;
 			y = grid.getCBase().getY() * grid.sideLength() + grid.sideLength()
@@ -31,15 +33,46 @@ public class Blob {
 	}
 
 	public void tick() {
-		if (human)
-			x += speed;
-		else
+		if (direction == 0)
+			x +=speed;
+		if (direction == 1)
+			y -= speed;
+		if (direction == 2)
 			x -= speed;
+		if (direction == 3)
+			y += speed;
+			while (grid.getMaze()[(int) nextBox().getX()][(int) nextBox().getY()] == false)
+				turn();
+	}
+	
+	public void turn(){
+		direction++;
+		if (direction == 4)
+			direction = 0;
+	}
+	
+	private Point currentBox(){
+		return new Point(x/grid.sideLength(), y/grid.sideLength());
+	}
+	
+	private Point nextBox(){
+		if (direction == 0)
+			return new Point(x/grid.sideLength() + 1, y/grid.sideLength());
+		if (direction == 1)
+			return new Point(x/grid.sideLength(), y/grid.sideLength() - 1);
+		if (direction == 2)
+			return new Point(x/grid.sideLength() - 1, y/grid.sideLength());
+		else
+			return new Point(x/grid.sideLength(), y/grid.sideLength() + 1);
 	}
 
 	public void draw(Graphics g) {
 		g.setColor(Color.MAGENTA);
 		g.fillOval(x - 10, y - 10, 20, 20);
+	}
+	
+	public void damage(int n){
+		health -= n;
 	}
 	
 	public boolean touchesBase(){
