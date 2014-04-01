@@ -8,22 +8,35 @@ public class GameScreen extends GDScreen {
 	
 	private Grid grid;
 	private Player player;
+<<<<<<< HEAD
+=======
+	private Button exitButton;
+>>>>>>> 68cebd975aa4407f64a26f8cf30abebfc7906c33
 
 	public GameScreen(GDFrame frame, Player player) {
 		super(frame);
+		this.player = player;
+		exitButton = new Button(frame.getWidth() - 30, 0, 30, 30, "X");
+		exitButton.setBGColor(Color.red);
+		exitButton.setTextColor(Color.white);
 		grid = new Grid(this);
 	}
 
 	public void tick() {
-
+		grid.tick();
+	}
+	
+	public Player getPlayer() {
+		return player;
 	}
 
 	public void draw() {
 		Graphics g = getFrame().getBufferStrategy().getDrawGraphics();
 		g.setColor(new Color(240, 240, 240));
 		g.fillRect(0, 0, getWidth(), getHeight());
-		g.setColor(Color.blue);
 		grid.draw(g);
+		exitButton.draw(g);
+		
 	}
 	
 	public Player getPlayer() {
@@ -31,6 +44,8 @@ public class GameScreen extends GDScreen {
 	}
 
 	public void mouseClicked(MouseEvent e) {
+		if (exitButton.onButton(getMouse()))
+			System.exit(0);
 		getFrame().switchScreen(new StartScreen(getFrame()));
 	}
 

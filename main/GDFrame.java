@@ -13,6 +13,8 @@ public class GDFrame extends Frame implements Runnable {
 	private int height = width * 9 / 16;
 	private GDScreen currentScreen;
 	private Thread thread;
+	private int fps = 30;
+	private long lastTime = System.currentTimeMillis();
 
 	public GDFrame() {
 		setLocation((int) ((Toolkit.getDefaultToolkit().getScreenSize().getWidth() - width) / 2),
@@ -30,9 +32,13 @@ public class GDFrame extends Frame implements Runnable {
 
 	public void run() {
 		while (true) {
-			tick();
-			draw();
-			getBufferStrategy().show();
+			long time = System.currentTimeMillis();
+			if ((time - lastTime) * fps > 1000) {
+				lastTime = time;
+				tick();
+				draw();
+				getBufferStrategy().show();
+			}
 		}
 	}
 
