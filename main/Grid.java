@@ -80,12 +80,13 @@ public class Grid {
 			offLimits[0][rand + 1] = true;
 		}
 		boolean finished = false;
+		int length = 1;
 		while (!finished) {
 			rand = (int) (4 * Math.random());
 			if (rand == 0) {
 				int x = (int) path.get(path.size() - 1).getX();
 				int y = (int) path.get(path.size() - 1).getY() - 1;
-				if (y >= 0 && !offLimits[x][y]) {
+				if (((length >= 50 && y >= 0) || (y > 0)) && !offLimits[x][y]) {
 					maze[x][y] = true;
 					path.add(new Point(x, y));
 					offLimits[x][y + 1] = true;
@@ -95,7 +96,8 @@ public class Grid {
 			} else if (rand == 1) {
 				int x = (int) path.get(path.size() - 1).getX() + 1;
 				int y = (int) path.get(path.size() - 1).getY();
-				if (x <= xBoxes - 1 && !offLimits[x][y]) {
+				if (((length >= 50 && x <= xBoxes - 1) || (x < xBoxes - 1))
+						&& !offLimits[x][y]) {
 					maze[x][y] = true;
 					path.add(new Point(x, y));
 					offLimits[x - 1][y] = true;
@@ -105,7 +107,8 @@ public class Grid {
 			} else if (rand == 2) {
 				int x = (int) path.get(path.size() - 1).getX();
 				int y = (int) path.get(path.size() - 1).getY() + 1;
-				if (y <= yBoxes - 1 && !offLimits[x][y]) {
+				if (((length >= 50 && y <= yBoxes - 1) || (y < yBoxes - 1))
+						&& !offLimits[x][y]) {
 					maze[x][y] = true;
 					path.add(new Point(x, y));
 					offLimits[x][y - 1] = true;
@@ -115,7 +118,7 @@ public class Grid {
 			} else {
 				int x = (int) path.get(path.size() - 1).getX() - 1;
 				int y = (int) path.get(path.size() - 1).getY();
-				if (x >= 0 && !offLimits[x][y]) {
+				if (((length >= 50 && x >= 0) || (x > 0)) && !offLimits[x][y]) {
 					maze[x][y] = true;
 					path.add(new Point(x, y));
 					offLimits[x + 1][y] = true;
@@ -123,11 +126,14 @@ public class Grid {
 					offLimits[x + 1][y + 1] = true;
 				}
 			}
+			length++;
 			int x = (int) path.get(path.size() - 1).getX();
 			int y = (int) path.get(path.size() - 1).getY();
-			if ((x == 0 || x == xBoxes - 1 || y == 0 || y == yBoxes - 1)&&path.size()>1) {
+			if ((x == 0 || x == xBoxes - 1 || y == 0 || y == yBoxes - 1)
+					&& path.size() > 1) {
 				finished = true;
 			}
+			System.out.println("test");
 		}
 	}
 
