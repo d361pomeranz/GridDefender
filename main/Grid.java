@@ -16,14 +16,18 @@ public class Grid {
 	private Base cBase;
 	private ArrayList<Blob> cBlobs = new ArrayList<Blob>();
 	private ArrayList<Blob> hBlobs = new ArrayList<Blob>();
+	private boolean worked=false;
 
 	public Grid(GameScreen gameScreen) {
 		this.gameScreen = gameScreen;
 		sideLength = gameScreen.getWidth() / xBoxes;
-		generateRandomMaze();
+		while(!worked){
+			generateRandomMaze();
+			System.out.println("test");
+		}
 		placeBases();
-		// hBlobs.add(new Blob(100, 3, this, false));
-		// cBlobs.add(new Blob(100, 3, this, true));
+		hBlobs.add(new Blob(100, 3, this, false));
+		cBlobs.add(new Blob(100, 3, this, true));
 	}
 
 	private void generateSimpleMaze() {
@@ -47,7 +51,10 @@ public class Grid {
 				offLimits[x][y] = false;
 			}
 		}
-
+		offLimits[0][0] = true;
+		offLimits[0][yBoxes - 1] = true;
+		offLimits[xBoxes - 1][0] = true;
+		offLimits[xBoxes - 1][yBoxes - 1] = true;
 		ArrayList<Point> path = new ArrayList<Point>();
 		int rand = (int) (4 * Math.random());
 		if (rand == 0) {
@@ -81,109 +88,113 @@ public class Grid {
 		}
 		boolean finished = false;
 		int length = 1;
+		int test=length;
+		int otherTest=0;
+		int minLength = 30;
 		while (!finished) {
 			rand = (int) (4 * Math.random());
 			if (rand == 0) {
 				int x = (int) path.get(path.size() - 1).getX();
 				int y = (int) path.get(path.size() - 1).getY() - 1;
-				if (((length >= 50 && y >= 0) || (y > 0)) && !offLimits[x][y]) {
+				if (((length >= minLength && y >= 0) || (y > 0))
+						&& !offLimits[x][y]) {
 					maze[x][y] = true;
 					path.add(new Point(x, y));
 					offLimits[x][y + 1] = true;
 					offLimits[x - 1][y + 1] = true;
 					offLimits[x + 1][y + 1] = true;
+					length++;
 				}
 			} else if (rand == 1) {
 				int x = (int) path.get(path.size() - 1).getX() + 1;
 				int y = (int) path.get(path.size() - 1).getY();
-				if (((length >= 50 && x <= xBoxes - 1) || (x < xBoxes - 1))
+				if (((length >= minLength && x <= xBoxes - 1) || (x < xBoxes - 1))
 						&& !offLimits[x][y]) {
 					maze[x][y] = true;
 					path.add(new Point(x, y));
 					offLimits[x - 1][y] = true;
 					offLimits[x - 1][y - 1] = true;
 					offLimits[x - 1][y + 1] = true;
+					length++;
 				}
 			} else if (rand == 2) {
 				int x = (int) path.get(path.size() - 1).getX();
 				int y = (int) path.get(path.size() - 1).getY() + 1;
-				if (((length >= 50 && y <= yBoxes - 1) || (y < yBoxes - 1))
+				if (((length >= minLength && y <= yBoxes - 1) || (y < yBoxes - 1))
 						&& !offLimits[x][y]) {
 					maze[x][y] = true;
 					path.add(new Point(x, y));
 					offLimits[x][y - 1] = true;
 					offLimits[x - 1][y - 1] = true;
 					offLimits[x + 1][y - 1] = true;
+					length++;
 				}
 			} else {
 				int x = (int) path.get(path.size() - 1).getX() - 1;
 				int y = (int) path.get(path.size() - 1).getY();
-				if (((length >= 50 && x >= 0) || (x > 0)) && !offLimits[x][y]) {
+				if (((length >= minLength && x >= 0) || (x > 0))
+						&& !offLimits[x][y]) {
 					maze[x][y] = true;
 					path.add(new Point(x, y));
 					offLimits[x + 1][y] = true;
 					offLimits[x + 1][y - 1] = true;
 					offLimits[x + 1][y + 1] = true;
+					length++;
 				}
 			}
-			length++;
+			if(test!=length){
+				test=length;
+			}else{
+				otherTest++;
+				if(otherTest>10){
+					return;
+				}
+			}
+			
 			int x = (int) path.get(path.size() - 1).getX();
 			int y = (int) path.get(path.size() - 1).getY();
 			if ((x == 0 || x == xBoxes - 1 || y == 0 || y == yBoxes - 1)
 					&& path.size() > 1) {
 				finished = true;
+				
 			}
-			System.out.println("test");
 		}
+		worked=true;
 	}
 
 	private void placeBases() {
-
 		for (int i = 1; i < xBoxes - 1; i++)
-			if (maze[i][0] == true && maze[i - 1][0] == true
-					&& maze[i + 1][0] == true)
+			if (maze[i][0] == true)
 				hBase = new Base(i, 0);
 		if (hBase == null)
 			for (int i = 1; i < yBoxes - 1; i++)
-				if (maze[0][i] == true && maze[0][i - 1] == true
-						&& maze[0][i + 1] == true)
+				if (maze[0][i] == true)
 					hBase = new Base(0, i);
 		if (hBase == null)
 			for (int i = 1; i < xBoxes - 1; i++)
-				if (maze[i][yBoxes - 1] == true
-						&& maze[i - 1][yBoxes - 1] == true
-						&& maze[i + 1][yBoxes - 1] == true)
+				if (maze[i][yBoxes - 1] == true)
 					hBase = new Base(i, yBoxes - 1);
 		if (hBase == null)
 			for (int i = 1; i < yBoxes - 1; i++)
-				if (maze[xBoxes - 1][i] == true
-						&& maze[xBoxes - 1][i - 1] == true
-						&& maze[xBoxes - 1][i + 1] == true)
+				if (maze[xBoxes - 1][i] == true)
 					hBase = new Base(xBoxes - 1, i);
-
 		for (int i = 1; i < xBoxes - 1; i++)
-			if (maze[i][0] == true && maze[i - 1][0] == true
-					&& maze[i + 1][0] == true)
+			if (maze[i][0] == true)
 				if (i != hBase.getX() || hBase.getY() != 0)
 					cBase = new Base(i, 0);
 		if (cBase == null)
 			for (int i = 1; i < yBoxes - 1; i++)
-				if (maze[0][i] == true && maze[0][i - 1] == true
-						&& maze[0][i + 1] == true)
+				if (maze[0][i] == true)
 					if (i != hBase.getY() || hBase.getX() != 0)
 						cBase = new Base(0, i);
 		if (cBase == null)
 			for (int i = 1; i < xBoxes - 1; i++)
-				if (maze[i][yBoxes - 1] == true
-						&& maze[i - 1][yBoxes - 1] == true
-						&& maze[i + 1][yBoxes - 1] == true)
+				if (maze[i][yBoxes - 1] == true)
 					if (i != hBase.getX() || hBase.getY() != yBoxes - 1)
 						cBase = new Base(i, yBoxes - 1);
 		if (cBase == null)
 			for (int i = 1; i < yBoxes - 1; i++)
-				if (maze[xBoxes - 1][i] == true
-						&& maze[xBoxes - 1][i - 1] == true
-						&& maze[xBoxes - 1][i + 1] == true)
+				if (maze[xBoxes - 1][i] == true)
 					if (i != hBase.getY() || hBase.getX() != xBoxes - 1)
 						cBase = new Base(xBoxes - 1, i);
 	}
@@ -219,12 +230,12 @@ public class Grid {
 			g.drawLine(x * sideLength, 0, x * sideLength, sideLength * yBoxes);
 		for (int y = 0; y <= yBoxes; y++)
 			g.drawLine(0, y * sideLength, sideLength * xBoxes, y * sideLength);
-		// hBase.draw(g, sideLength);
-		// cBase.draw(g, sideLength);
-		// for (Blob b : cBlobs)
-		// b.draw(g);
-		// for (Blob b : hBlobs)
-		// b.draw(g);
+		hBase.draw(g, sideLength);
+		cBase.draw(g, sideLength);
+		for (Blob b : cBlobs)
+			b.draw(g);
+		for (Blob b : hBlobs)
+			b.draw(g);
 	}
 
 	public Base getHBase() {
