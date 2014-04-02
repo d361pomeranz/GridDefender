@@ -8,10 +8,7 @@ public class GameScreen extends GDScreen {
 	
 	private Grid grid;
 	private Player player;
-<<<<<<< HEAD
-=======
 	private Button exitButton;
->>>>>>> 68cebd975aa4407f64a26f8cf30abebfc7906c33
 
 	public GameScreen(GDFrame frame, Player player) {
 		super(frame);
@@ -37,10 +34,6 @@ public class GameScreen extends GDScreen {
 		grid.draw(g);
 		exitButton.draw(g);
 		
-	}
-	
-	public Player getPlayer() {
-		return player;
 	}
 
 	public void mouseClicked(MouseEvent e) {

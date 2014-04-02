@@ -5,12 +5,9 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
 public class StartScreen extends GDScreen {
-<<<<<<< HEAD
-=======
 	private Button newGameButton;
 	private Button loadGameButton;
 	private Button exitButton;
->>>>>>> 68cebd975aa4407f64a26f8cf30abebfc7906c33
 
 	public StartScreen(GDFrame frame) {
 		super(frame);
@@ -39,7 +36,6 @@ public class StartScreen extends GDScreen {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-<<<<<<< HEAD
 		getFrame().switchScreen(new GameScreen(getFrame(), new Player()));
 	}
 
@@ -57,24 +53,10 @@ public class StartScreen extends GDScreen {
 
 	public void mouseReleased(MouseEvent e) {
 
-=======
 		if (newGameButton.onButton(getMouse()))
 			getFrame().switchScreen(new GameScreen(getFrame(), new Player()));
 		if (exitButton.onButton(getMouse()))
 			System.exit(0);
-	}
-
-	public void mouseEntered(MouseEvent e) {
-	}
-
-	public void mouseExited(MouseEvent e) {
-	}
-
-	public void mousePressed(MouseEvent e) {
-	}
-
-	public void mouseReleased(MouseEvent e) {
->>>>>>> 68cebd975aa4407f64a26f8cf30abebfc7906c33
 	}
 
 }

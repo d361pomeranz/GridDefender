@@ -20,8 +20,6 @@ public class Grid {
 	public Grid(GameScreen gameScreen) {
 		this.gameScreen = gameScreen;
 		sideLength = gameScreen.getWidth() / xBoxes;
-<<<<<<< HEAD
-=======
 		generateRandomMaze();
 		placeBases();
 		// hBlobs.add(new Blob(100, 3, this, false));
@@ -201,7 +199,6 @@ public class Grid {
 			}
 			b.tick();
 		}
->>>>>>> 68cebd975aa4407f64a26f8cf30abebfc7906c33
 	}
 
 	public void draw(Graphics g) {
@@ -216,8 +213,6 @@ public class Grid {
 			g.drawLine(x * sideLength, 0, x * sideLength, sideLength * yBoxes);
 		for (int y = 0; y <= yBoxes; y++)
 			g.drawLine(0, y * sideLength, sideLength * xBoxes, y * sideLength);
-<<<<<<< HEAD
-=======
 		// hBase.draw(g, sideLength);
 		// cBase.draw(g, sideLength);
 		// for (Blob b : cBlobs)
@@ -245,7 +240,6 @@ public class Grid {
 	public Point getBox(Point p) {
 		gameScreen.getHeight();
 		return p;
->>>>>>> 68cebd975aa4407f64a26f8cf30abebfc7906c33
 	}
 
 }
