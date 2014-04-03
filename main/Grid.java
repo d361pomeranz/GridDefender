@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Grid {
 
-	private int xBoxes = 48;
+	private int xBoxes = 32;
 	private int yBoxes = xBoxes / 16 * 9;
 	private int sideLength;
 	private GameScreen gameScreen;
@@ -21,10 +21,11 @@ public class Grid {
 	public Grid(GameScreen gameScreen) {
 		this.gameScreen = gameScreen;
 		sideLength = gameScreen.getWidth() / xBoxes;
-		while(!worked){
-			generateRandomMaze();
-			System.out.println("test");
-		}
+//		while(!worked){
+//			generateRandomMaze();
+//			System.out.println("test");
+//		}
+		dansGenerateRandomMaze();
 		placeBases();
 		hBlobs.add(new Blob(100, 3, this, false));
 		cBlobs.add(new Blob(100, 3, this, true));
@@ -36,10 +37,66 @@ public class Grid {
 			for (int y = 0; y < yBoxes; y++)
 				maze[x][y] = false;
 		for (int i = 0; i < xBoxes; i++) {
-			maze[i][9] = true;
 			maze[i][8] = true;
-			maze[i][7] = true;
 		}
+	}
+	
+	private void dansGenerateRandomMaze(){
+		int cy = (int) (Math.random() * (yBoxes - 1) + 1);
+		int hy = (int) (Math.random() * (yBoxes - 1) + 1);
+	
+		maze = new boolean[xBoxes][yBoxes];
+		boolean noBueno[][] = new boolean[xBoxes][yBoxes];
+		for (int x = 0; x < xBoxes; x++) {
+			for (int y = 0; y < yBoxes; y++){ 
+				maze[x][y] = false;
+				noBueno[x][y] = false;
+			}
+		}
+		for (int i = 0; i < 2; i++){
+			maze[i][hy] = true;
+			maze[xBoxes - 1 - i][cy] = true;
+		}
+		int turnNum = 3;
+		Point[] turns = new Point[turnNum];
+		int turnCount = 0;
+		while (turnCount < turnNum){
+			int rx =  (int) (Math.random() * (xBoxes - 4) + 2);
+			int ry =  (int) (Math.random() * (yBoxes - 3) + 1);
+			if (noBueno[rx][ry] == false){
+				turns[turnCount] = new Point(rx, ry);
+				maze[rx][ry] = true;
+				noBueno[rx + 1][ry] = true;
+				noBueno[rx - 1][ry] = true;
+				noBueno[rx + 2][ry] = true;
+				noBueno[rx - 2][ry] = true;
+				noBueno[rx + 1][ry + 1] = true;
+				noBueno[rx - 1][ry + 1] = true;
+				noBueno[rx + 1][ry - 1] = true;
+				noBueno[rx - 1][ry - 1] = true;
+				for(int i = 0; i < yBoxes; i++)
+					noBueno[rx][i] = true;
+				turnCount++;
+			}	
+		}
+		
+		Point[] turnsF = new Point[turnNum];
+		
+		for (int i = 0; i < turnNum; i++){
+			Point lowX = new Point(100,100);
+			for (int z = 0; z < turnNum; z++){
+				if (turns[z].getX() < lowX.getX()){
+					lowX = new Point(turns[z]);
+				}
+			}
+			turns[i] = new Point(100,100);
+			turnsF[i] = lowX;
+			System.out.println(turnsF[i].getX());
+		}
+		
+
+		
+		
 	}
 
 	private void generateRandomMaze() {
@@ -200,22 +257,22 @@ public class Grid {
 	}
 
 	public void tick() {
-		for (Blob b : cBlobs) {
-			if (b.touchesBase()) {
-				cBlobs.remove(b);
-				hBase.damage(10);
-				return;
-			}
-			b.tick();
-		}
-		for (Blob b : hBlobs) {
-			if (b.touchesBase()) {
-				hBlobs.remove(b);
-				cBase.damage(10);
-				return;
-			}
-			b.tick();
-		}
+//		for (Blob b : cBlobs) {
+//			if (b.touchesBase()) {
+//				cBlobs.remove(b);
+//				hBase.damage(10);
+//				return;
+//			}
+//			b.tick();
+//		}
+//		for (Blob b : hBlobs) {
+//			if (b.touchesBase()) {
+//				hBlobs.remove(b);
+//				cBase.damage(10);
+//				return;
+//			}
+//			b.tick();
+//		}
 	}
 
 	public void draw(Graphics g) {

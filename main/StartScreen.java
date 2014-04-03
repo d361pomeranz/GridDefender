@@ -36,7 +36,11 @@ public class StartScreen extends GDScreen {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		getFrame().switchScreen(new GameScreen(getFrame(), new Player()));
+		if (newGameButton.onButton(getMouse()))
+			getFrame().switchScreen(new GameScreen(getFrame(), new Player()));
+		if (exitButton.onButton(getMouse()))
+			System.exit(0);
+		System.out.println("click");
 	}
 
 	public void mouseEntered(MouseEvent e) {
@@ -53,10 +57,7 @@ public class StartScreen extends GDScreen {
 
 	public void mouseReleased(MouseEvent e) {
 
-		if (newGameButton.onButton(getMouse()))
-			getFrame().switchScreen(new GameScreen(getFrame(), new Player()));
-		if (exitButton.onButton(getMouse()))
-			System.exit(0);
+		
 	}
 
 }
