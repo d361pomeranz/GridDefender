@@ -18,18 +18,13 @@ public class Grid {
 	private ArrayList<Blob> cBlobs = new ArrayList<Blob>();
 	private ArrayList<Blob> hBlobs = new ArrayList<Blob>();
 	private boolean worked = false;
+	private long ticks = 0;
 
 	public Grid(GameScreen gameScreen) {
 		this.gameScreen = gameScreen;
 		sideLength = gameScreen.getWidth() / xBoxes;
-		// while(!worked){
-		// generateRandomMaze();
-		// System.out.println("test");
-		// }
 		dansGenerateRandomMaze();
 		placeBases();
-		hBlobs.add(new Blob(100, 3, this, false));
-		cBlobs.add(new Blob(100, 3, this, true));
 	}
 
 	private void generateSimpleMaze() {
@@ -327,6 +322,12 @@ public class Grid {
 			}
 			b.tick();
 		}
+		if (ticks%30 == 0 && ticks < 300){
+			hBlobs.add(new Blob(100, 7, this, false));
+			cBlobs.add(new Blob(100, 7, this, true));
+		}
+			
+		ticks++;
 	}
 
 	public void draw(Graphics g) {
@@ -336,10 +337,6 @@ public class Grid {
 				if (maze[x][y] == true)
 					g.fillRect(sideLength * x, sideLength * y, sideLength,
 							sideLength);
-		g.setColor(Color.black);
-		for (Point p : ps)
-			g.fillRect((int) (sideLength * p.getX() + 10), (int) (sideLength
-					* p.getY() + 10), sideLength - 20, sideLength - 20);
 		g.setColor(Color.BLUE);
 		for (int x = 0; x <= xBoxes; x++)
 			g.drawLine(x * sideLength, 0, x * sideLength, sideLength * yBoxes);
