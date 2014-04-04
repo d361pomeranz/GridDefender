@@ -20,7 +20,6 @@ public class Base {
 	}
 	
 	public void draw(Graphics g, int sideLength){
-		g.setColor(Color.red);
 		g.fillRect(sideLength * x + 8, sideLength * y + 8, sideLength - 14, sideLength - 14);
 		g.setColor(Color.black);
 		g.drawString(Integer.toString(health), sideLength * x + sideLength/2, sideLength * y + sideLength/2);

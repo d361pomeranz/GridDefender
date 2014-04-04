@@ -322,9 +322,9 @@ public class Grid {
 			}
 			b.tick();
 		}
-		if (ticks%30 == 0 && ticks < 300){
-			hBlobs.add(new Blob(100, 7, this, false));
-			cBlobs.add(new Blob(100, 7, this, true));
+		if (ticks%10 == 0 && ticks < 300){
+			hBlobs.add(new Blob(100, 5, this, false));
+			cBlobs.add(new Blob(100, 5, this, true));
 		}
 			
 		ticks++;
@@ -342,7 +342,9 @@ public class Grid {
 			g.drawLine(x * sideLength, 0, x * sideLength, sideLength * yBoxes);
 		for (int y = 0; y <= yBoxes; y++)
 			g.drawLine(0, y * sideLength, sideLength * xBoxes, y * sideLength);
+		g.setColor(Color.red);
 		hBase.draw(g, sideLength);
+		g.setColor(Color.blue);
 		cBase.draw(g, sideLength);
 		for (Blob b : cBlobs)
 			b.draw(g);

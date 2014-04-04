@@ -8,8 +8,8 @@ public class GDFrame extends Frame implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 
-	private double screenMultiplier = .9;
-	private int width = (int) (screenMultiplier * Toolkit.getDefaultToolkit().getScreenSize().getWidth());
+	private double screenMultiplier = .8;
+	private int width = 1440;
 	private int height = width * 9 / 16;
 	private GDScreen currentScreen;
 	private Thread thread;
