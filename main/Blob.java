@@ -37,8 +37,13 @@ public class Blob {
 		if (direction == 3)
 			y -= speed;
 		if (x - currentBox().getX() * grid.sideLength() == grid.sideLength()/2)
-			while (grid.getMaze()[(int) nextBox().getX()][(int) nextBox().getY()] == false)
+			while (grid.getMaze()[(int) nextBox().getX()][(int) nextBox().getY()] == false){
 				turn();
+				if (grid.getMaze()[(int) nextBox().getX()][(int) nextBox().getY()] == false){
+					turn();
+					turn();
+				}
+			}
 	}
 	public void turn(){
 		direction++;
