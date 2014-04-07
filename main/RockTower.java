@@ -10,16 +10,16 @@ public class RockTower extends Tower{
 			super(speed,direction,damage,false,0);
 		}
 	}
-	RockTower(int x, int y, Grid g) {
-		super(x, y, g);
+	RockTower(int x, int y, Player p) {
+		super(x, y, p);
 	}
 	public void shoot() {
 		
 	}
 	public void draw(Graphics g) {
-		int xStart=getGrid().sideLength()*getxPos();
-		int yStart=getGrid().sideLength()*getxPos();
-		int sideLength=getGrid().sideLength();
+		int xStart=getPlayer().getGrid().sideLength()*getX();
+		int yStart=getPlayer().getGrid().sideLength()*getX();
+		int sideLength=getPlayer().getGrid().sideLength();
 		g.setColor(new Color(110,91,16));
 		g.fillRect(xStart, yStart, sideLength,sideLength);
 		g.setColor(new Color(130,118,109));
