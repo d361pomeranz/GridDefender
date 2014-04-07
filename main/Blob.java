@@ -54,7 +54,9 @@ public class Blob {
 						}
 	}
 
-
+public Point getPoint(){
+	return new Point(x,y);
+}
 public void turn() {
 	direction++;
 	if (direction == 4)

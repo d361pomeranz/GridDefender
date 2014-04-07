@@ -23,8 +23,14 @@ public class RockTower extends Tower {
 		Point p = new Point(getPlayer().getGrid().sideLength() * getX()
 				+ getPlayer().getGrid().sideLength() / 2, getPlayer().getGrid()
 				.sideLength() * getY() + getPlayer().getGrid().sideLength() / 2);
+		double distance=1000000;
 		for (Blob b : getPlayer().getBlobs()) {
-
+			double test=p.distance(b.getPoint());
+			if(test<distance){
+				closest=b;
+				distance=test;
+			}
+			
 		}
 	}
 
