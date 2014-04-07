@@ -6,11 +6,13 @@ public class Player {
 	private Grid g;
 	private ArrayList<Blob> enemyBlobs;
 	private ArrayList<Blob> playerBlobs;
+	private UI ui;
 	
 	public Player(Grid grid, ArrayList<Blob> e, ArrayList<Blob> p){
 		g = grid;
 		enemyBlobs = e;
 		playerBlobs = p;
+		ui = new UI(this);
 	}
 	
 	public void addTower(Tower t){
@@ -26,6 +28,10 @@ public class Player {
 	
 	public Grid getGrid(){
 		return g;
+	}
+	
+	public UI getUI(){
+		return ui;
 	}
 	
 	

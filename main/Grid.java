@@ -226,6 +226,7 @@ public class Grid {
 			b.draw(g);
 		for(Tower t : player.getTowers())
 			t.draw(g);
+		player.getUI.draw(g);
 	}
 
 	public Base getHBase() {
