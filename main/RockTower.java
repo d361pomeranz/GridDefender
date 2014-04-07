@@ -4,7 +4,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class RockTower extends Tower{
-
+	private double shootDirection;
+	private class Rock extends Bullet{
+		Rock(int speed, double direction, int damage){
+			super(speed,direction,damage,false,0);
+		}
+	}
 	RockTower(int x, int y, Grid g) {
 		super(x, y, g);
 	}
