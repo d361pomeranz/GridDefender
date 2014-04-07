@@ -8,7 +8,12 @@ public abstract class Tower{
 	private int range;
 	private int xPos;
 	private int yPos;
-	
+	private Grid grid;
+	Tower(int x, int y, Grid g){
+		xPos=x;
+		yPos=y;
+		grid=g;
+	}
 	public int getxPos() {
 		return xPos;
 	}
@@ -25,9 +30,11 @@ public abstract class Tower{
 		this.yPos = yPos;
 	}
 	
-	public void draw(Graphics g){
-		
+	public Grid getGrid(){
+		return grid;
 	}
+	
+	public abstract void draw(Graphics g);
 	public abstract void shoot();
 	
 

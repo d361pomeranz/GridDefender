@@ -30,8 +30,6 @@ public class Blob {
 			y = grid.getCBase().getY() * grid.sideLength() + grid.sideLength()
 					/ 2;
 		}
-		
-		y += (int)(Math.random() * (speed - 2) - speed/2) + 1;
 	}
 
 	public void tick() {
