@@ -17,7 +17,6 @@ public class Grid {
 	private Base cBase;
 	private ArrayList<Blob> cBlobs = new ArrayList<Blob>();
 	private ArrayList<Blob> hBlobs = new ArrayList<Blob>();
-	private boolean worked = false;
 	private long ticks = 0;
 	private Player player;
 	private Player cPlayer;
@@ -29,16 +28,6 @@ public class Grid {
 		placeBases();
 		cPlayer = new Player(this, hBlobs, cBlobs);
 		player = new Player(this, cBlobs, hBlobs);
-	}
-
-	private void generateSimpleMaze() {
-		maze = new boolean[xBoxes][yBoxes];
-		for (int x = 0; x < xBoxes; x++)
-			for (int y = 0; y < yBoxes; y++)
-				maze[x][y] = false;
-		for (int i = 0; i < xBoxes; i++) {
-			maze[i][8] = true;
-		}
 	}
 
 	private void dansGenerateRandomMaze() {
@@ -150,126 +139,6 @@ public class Grid {
 
 		}
 
-	}
-
-	private void generateRandomMaze() {
-		maze = new boolean[xBoxes][yBoxes];
-		boolean[][] offLimits = new boolean[xBoxes][yBoxes];
-		for (int x = 0; x < xBoxes; x++) {
-			for (int y = 0; y < yBoxes; y++) {
-				maze[x][y] = false;
-				offLimits[x][y] = false;
-			}
-		}
-		offLimits[0][0] = true;
-		offLimits[0][yBoxes - 1] = true;
-		offLimits[xBoxes - 1][0] = true;
-		offLimits[xBoxes - 1][yBoxes - 1] = true;
-		ArrayList<Point> path = new ArrayList<Point>();
-		int rand = (int) (4 * Math.random());
-		if (rand == 0) {
-			rand = (int) ((xBoxes - 2) * Math.random()) + 1;
-			maze[rand][0] = true;
-			path.add(new Point(rand, 0));
-			offLimits[rand][0] = true;
-			offLimits[rand - 1][0] = true;
-			offLimits[rand + 1][0] = true;
-		} else if (rand == 1) {
-			rand = (int) ((yBoxes - 2) * Math.random()) + 1;
-			maze[xBoxes - 1][rand] = true;
-			path.add(new Point(xBoxes - 1, rand));
-			offLimits[xBoxes - 1][rand] = true;
-			offLimits[xBoxes - 1][rand - 1] = true;
-			offLimits[xBoxes - 1][rand + 1] = true;
-		} else if (rand == 2) {
-			rand = (int) ((xBoxes - 2) * Math.random()) + 1;
-			maze[rand][yBoxes - 1] = true;
-			path.add(new Point(rand, yBoxes - 1));
-			offLimits[rand][yBoxes - 1] = true;
-			offLimits[rand - 1][yBoxes - 1] = true;
-			offLimits[rand + 1][yBoxes - 1] = true;
-		} else {
-			rand = (int) ((yBoxes - 2) * Math.random()) + 1;
-			maze[0][rand] = true;
-			path.add(new Point(0, rand));
-			offLimits[0][rand] = true;
-			offLimits[0][rand - 1] = true;
-			offLimits[0][rand + 1] = true;
-		}
-		boolean finished = false;
-		int length = 1;
-		int test = length;
-		int otherTest = 0;
-		int minLength = 30;
-		while (!finished) {
-			rand = (int) (4 * Math.random());
-			if (rand == 0) {
-				int x = (int) path.get(path.size() - 1).getX();
-				int y = (int) path.get(path.size() - 1).getY() - 1;
-				if (((length >= minLength && y >= 0) || (y > 0))
-						&& !offLimits[x][y]) {
-					maze[x][y] = true;
-					path.add(new Point(x, y));
-					offLimits[x][y + 1] = true;
-					offLimits[x - 1][y + 1] = true;
-					offLimits[x + 1][y + 1] = true;
-					length++;
-				}
-			} else if (rand == 1) {
-				int x = (int) path.get(path.size() - 1).getX() + 1;
-				int y = (int) path.get(path.size() - 1).getY();
-				if (((length >= minLength && x <= xBoxes - 1) || (x < xBoxes - 1))
-						&& !offLimits[x][y]) {
-					maze[x][y] = true;
-					path.add(new Point(x, y));
-					offLimits[x - 1][y] = true;
-					offLimits[x - 1][y - 1] = true;
-					offLimits[x - 1][y + 1] = true;
-					length++;
-				}
-			} else if (rand == 2) {
-				int x = (int) path.get(path.size() - 1).getX();
-				int y = (int) path.get(path.size() - 1).getY() + 1;
-				if (((length >= minLength && y <= yBoxes - 1) || (y < yBoxes - 1))
-						&& !offLimits[x][y]) {
-					maze[x][y] = true;
-					path.add(new Point(x, y));
-					offLimits[x][y - 1] = true;
-					offLimits[x - 1][y - 1] = true;
-					offLimits[x + 1][y - 1] = true;
-					length++;
-				}
-			} else {
-				int x = (int) path.get(path.size() - 1).getX() - 1;
-				int y = (int) path.get(path.size() - 1).getY();
-				if (((length >= minLength && x >= 0) || (x > 0))
-						&& !offLimits[x][y]) {
-					maze[x][y] = true;
-					path.add(new Point(x, y));
-					offLimits[x + 1][y] = true;
-					offLimits[x + 1][y - 1] = true;
-					offLimits[x + 1][y + 1] = true;
-					length++;
-				}
-			}
-			if (test != length) {
-				test = length;
-			} else {
-				otherTest++;
-				if (otherTest > 10) {
-					return;
-				}
-			}
-
-			int x = (int) path.get(path.size() - 1).getX();
-			int y = (int) path.get(path.size() - 1).getY();
-			if ((x == 0 || x == xBoxes - 1 || y == 0 || y == yBoxes - 1)
-					&& path.size() > 1) {
-				finished = true;
-
-			}
-		}
-		worked = true;
 	}
 
 	private void placeBases() {

@@ -16,5 +16,15 @@ public class Player {
 	public void addTower(Tower t){
 		towers.add(t);
 	}
+	
+	public ArrayList<Blob> getBlobs(){
+		return enemyBlobs;
+	}
+	
+	public Grid getGrid(){
+		return g;
+	}
+	
+	
 
 }
