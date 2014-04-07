@@ -7,12 +7,10 @@ import java.awt.event.MouseEvent;
 public class GameScreen extends GDScreen {
 	
 	private Grid grid;
-	private Player player;
 	private Button exitButton;
 
-	public GameScreen(GDFrame frame, Player player) {
+	public GameScreen(GDFrame frame) {
 		super(frame);
-		this.player = player;
 		exitButton = new Button(frame.getWidth() - 30, 0, 30, 30, "X");
 		exitButton.setBGColor(Color.red);
 		exitButton.setTextColor(Color.white);
@@ -23,10 +21,6 @@ public class GameScreen extends GDScreen {
 		grid.tick();
 	}
 	
-	public Player getPlayer() {
-		return player;
-	}
-
 	public void draw() {
 		Graphics g = getFrame().getBufferStrategy().getDrawGraphics();
 		g.setColor(new Color(240, 240, 240));

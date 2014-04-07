@@ -35,7 +35,7 @@ public class StartScreen extends GDScreen {
 
 	public void mouseClicked(MouseEvent e) {
 		if (newGameButton.onButton(getMouse()))
-			getFrame().switchScreen(new GameScreen(getFrame(), new Player()));
+			getFrame().switchScreen(new GameScreen(getFrame()));
 		if (exitButton.onButton(getMouse()))
 			System.exit(0);
 	}

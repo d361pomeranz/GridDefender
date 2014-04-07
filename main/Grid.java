@@ -19,12 +19,16 @@ public class Grid {
 	private ArrayList<Blob> hBlobs = new ArrayList<Blob>();
 	private boolean worked = false;
 	private long ticks = 0;
+	private Player player;
+	private Player cPlayer;
 
 	public Grid(GameScreen gameScreen) {
 		this.gameScreen = gameScreen;
 		sideLength = gameScreen.getWidth() / xBoxes;
 		dansGenerateRandomMaze();
 		placeBases();
+		cPlayer = new Player(this, hBlobs, cBlobs);
+		player = new Player(this, cBlobs, hBlobs);
 	}
 
 	private void generateSimpleMaze() {
