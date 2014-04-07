@@ -28,6 +28,7 @@ public class Grid {
 		placeBases();
 		cPlayer = new Player(this, hBlobs, cBlobs);
 		player = new Player(this, cBlobs, hBlobs);
+		player.addTower(new RockTower(6,6,player));
 	}
 
 	private void dansGenerateRandomMaze() {
@@ -223,6 +224,8 @@ public class Grid {
 			b.draw(g);
 		for (Blob b : hBlobs)
 			b.draw(g);
+		for(Tower t : player.getTowers())
+			t.draw(g);
 	}
 
 	public Base getHBase() {

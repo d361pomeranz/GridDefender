@@ -2,7 +2,7 @@ package main;
 import java.util.ArrayList;
 
 public class Player {
-	private ArrayList<Tower> towers;
+	private ArrayList<Tower> towers=new ArrayList<Tower>();
 	private Grid g;
 	private ArrayList<Blob> enemyBlobs;
 	private ArrayList<Blob> playerBlobs;
@@ -19,6 +19,9 @@ public class Player {
 	
 	public ArrayList<Blob> getBlobs(){
 		return enemyBlobs;
+	}
+	public ArrayList<Tower> getTowers(){
+		return towers;
 	}
 	
 	public Grid getGrid(){
