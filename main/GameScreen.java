@@ -8,6 +8,7 @@ public class GameScreen extends GDScreen {
 	
 	private Grid grid;
 	private Button exitButton;
+	private boolean mouseDown = false;
 
 	public GameScreen(GDFrame frame) {
 		super(frame);
@@ -41,15 +42,15 @@ public class GameScreen extends GDScreen {
 	}
 
 	public void mouseExited(MouseEvent e) {
-
+		
 	}
 
 	public void mousePressed(MouseEvent e) {
-
+		mouseDown = true;
 	}
 
 	public void mouseReleased(MouseEvent e) {
-
+		mouseDown = false;
 	}
 
 	

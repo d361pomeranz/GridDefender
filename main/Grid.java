@@ -20,6 +20,7 @@ public class Grid {
 	private long ticks = 0;
 	private Player player;
 	private Player cPlayer;
+	private UI ui;
 
 	public Grid(GameScreen gameScreen) {
 		this.gameScreen = gameScreen;
@@ -28,7 +29,8 @@ public class Grid {
 		placeBases();
 		cPlayer = new Player(this, hBlobs, cBlobs);
 		player = new Player(this, cBlobs, hBlobs);
-		player.addTower(new RockTower(6,6,player));
+		player.addTower(new RockTower(6, 6, player));
+		ui = new UI(player);
 	}
 
 	private void dansGenerateRandomMaze() {
@@ -101,10 +103,10 @@ public class Grid {
 			boolean horizontal = Math.random() < 0.5;
 			Point start = ps.get(i);
 			Point end = ps.get(i + 1);
-			if (maze[(int) start.getX() + 1][(int) start.getY()]){
+			if (maze[(int) start.getX() + 1][(int) start.getY()]) {
 				horizontal = false;
 			} else {
-				if (end.getY() > start.getY()){
+				if (end.getY() > start.getY()) {
 					if (maze[(int) start.getX()][(int) start.getY() + 1])
 						horizontal = true;
 				} else {
@@ -196,11 +198,11 @@ public class Grid {
 			}
 			b.tick();
 		}
-		if (ticks%10 == 0 && ticks < 300){
+		if (ticks % 10 == 0 && ticks < 300) {
 			hBlobs.add(new Blob(100, 5, this, false));
 			cBlobs.add(new Blob(100, 5, this, true));
 		}
-			
+
 		ticks++;
 	}
 
@@ -224,9 +226,9 @@ public class Grid {
 			b.draw(g);
 		for (Blob b : hBlobs)
 			b.draw(g);
-		for(Tower t : player.getTowers())
+		for (Tower t : player.getTowers())
 			t.draw(g);
-		player.getUI.draw(g);
+		ui.draw(g);
 	}
 
 	public Base getHBase() {
