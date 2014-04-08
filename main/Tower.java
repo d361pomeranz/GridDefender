@@ -29,7 +29,11 @@ public abstract class Tower {
 	}
 
 	public abstract void draw(Graphics g);
-
 	public abstract void shoot();
+	public abstract int getRange();
+	public abstract int getDamage();
+	public int getLevel(){
+		return level;
+	}
 
 }
