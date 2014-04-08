@@ -32,6 +32,8 @@ public abstract class Tower {
 	public abstract void shoot();
 	public abstract int getRange();
 	public abstract int getDamage();
+	public abstract void tick();
+	public abstract double getSpeed();
 	public int getLevel(){
 		return level;
 	}

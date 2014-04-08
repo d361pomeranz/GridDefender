@@ -4,13 +4,13 @@ import java.awt.Graphics;
 import java.awt.Point;
 
 public abstract class Bullet {
-	private int speed;
+	private double speed;
 	private double direction;
 	private int damage;
 	private boolean splash;
 	private int splashRandge;
 	private Point point;
-	Bullet(int speed, double direction,int damage, boolean splash,int splashRange,Point start){
+	Bullet(double speed, double direction,int damage, boolean splash,int splashRange,Point start){
 		this.speed=speed;
 		this.direction=direction;
 		this.damage=damage;
@@ -19,6 +19,7 @@ public abstract class Bullet {
 		this.point=start;
 	}
 	public abstract void draw(Graphics g);
+	public abstract void tick();
 	public Point getPoint(){
 		return point;
 	}
@@ -28,7 +29,7 @@ public abstract class Bullet {
 	public double getDirection(){
 		return direction;
 	}
-	public int getSpeed(){
+	public double getSpeed(){
 		return speed;
 	}
 }

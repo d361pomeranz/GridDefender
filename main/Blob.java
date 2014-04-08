@@ -91,6 +91,8 @@ public class Blob {
 		else
 			g.setColor(Color.blue);
 		g.fillOval(x - 10, y - 10, 20, 20);
+		g.setColor(Color.black);
+		g.drawString("" + health, x, y);
 	}
 
 	public void damage(int n) {

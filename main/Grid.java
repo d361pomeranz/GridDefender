@@ -29,7 +29,7 @@ public class Grid {
 		placeBases();
 		cPlayer = new Player(this, hBlobs, cBlobs);
 		player = new Player(this, cBlobs, hBlobs);
-		player.addTower(new RockTower(6, 6, player));
+		player.addTower(new RockTower(25, 6, player));
 		ui = new UI(player);
 	}
 
@@ -202,7 +202,8 @@ public class Grid {
 			hBlobs.add(new Blob(100, 5, this, false));
 			cBlobs.add(new Blob(100, 5, this, true));
 		}
-
+		for (Tower t : player.getTowers())
+			t.tick();
 		ticks++;
 	}
 
