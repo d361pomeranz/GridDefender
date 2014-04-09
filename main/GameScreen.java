@@ -5,10 +5,9 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 
 public class GameScreen extends GDScreen {
-	
+
 	private Grid grid;
 	private Button exitButton;
-	private boolean mouseDown = false;
 
 	public GameScreen(GDFrame frame) {
 		super(frame);
@@ -21,20 +20,20 @@ public class GameScreen extends GDScreen {
 	public void tick() {
 		grid.tick();
 	}
-	
+
 	public void draw() {
 		Graphics g = getFrame().getBufferStrategy().getDrawGraphics();
 		g.setColor(new Color(240, 240, 240));
 		g.fillRect(0, 0, getWidth(), getHeight());
 		grid.draw(g);
 		exitButton.draw(g);
-		
 	}
 
 	public void mouseClicked(MouseEvent e) {
 		if (exitButton.onButton(getMouse()))
 			System.exit(0);
-		getFrame().switchScreen(new StartScreen(getFrame()));
+		if (grid.getUI().onBox(getMouse()))
+			grid.getUI().alter();
 	}
 
 	public void mouseEntered(MouseEvent e) {
@@ -42,17 +41,16 @@ public class GameScreen extends GDScreen {
 	}
 
 	public void mouseExited(MouseEvent e) {
-		
+
 	}
 
 	public void mousePressed(MouseEvent e) {
-		mouseDown = true;
+		if (grid.getUI().onBar(getMouse()))
+			grid.getUI().setMouseDownOnBar(true);
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		mouseDown = false;
+			grid.getUI().setMouseDownOnBar(false);
 	}
-
-	
 
 }
