@@ -32,6 +32,10 @@ public class Grid {
 		player.addTower(new RockTower(25, 6, player));
 		ui = new UI(player);
 	}
+	
+	public GameScreen getScreen(){
+		return gameScreen;
+	}
 
 	private void dansGenerateRandomMaze() {
 		int cy = (int) (Math.random() * (yBoxes - 2) + 1);
@@ -206,6 +210,7 @@ public class Grid {
 			t.tick();
 		player.tick();
 		ticks++;
+		ui.tick();
 	}
 
 	public void draw(Graphics g) {
@@ -252,6 +257,10 @@ public class Grid {
 	public Point getBox(Point p) {
 		gameScreen.getHeight();
 		return p;
+	}
+
+	public UI getUI() {
+		return ui;
 	}
 
 }

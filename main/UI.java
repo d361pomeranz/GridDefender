@@ -42,8 +42,8 @@ public class UI {
 
 	public void tick() {
 		if (mouseDownOnBar) {
-			x = (int) (grid.getScreen().getMouse().getX() + x - lastPosition.getX());
-			y = (int) (grid.getScreen().getMouse().getY() + y - lastPosition.getY());
+			x = (int) (grid.getScreen().getMouse().getX());
+			y = (int) (grid.getScreen().getMouse().getY());
 		}
 	}
 
