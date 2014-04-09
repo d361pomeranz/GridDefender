@@ -198,12 +198,13 @@ public class Grid {
 			}
 			b.tick();
 		}
-		if (ticks % 10 == 0 && ticks < 300) {
+		if (ticks % 10 == 0 && ticks < 10) {
 			hBlobs.add(new Blob(100, 5, this, false));
 			cBlobs.add(new Blob(100, 5, this, true));
 		}
 		for (Tower t : player.getTowers())
 			t.tick();
+		player.tick();
 		ticks++;
 	}
 

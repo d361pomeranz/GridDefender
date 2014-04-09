@@ -98,6 +98,9 @@ public class Blob {
 	public void damage(int n) {
 		health -= n;
 	}
+	public int getHealth(){
+		return health;
+	}
 
 	public boolean touchesBase() {
 		Point p = new Point(x, y);

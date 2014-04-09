@@ -2,6 +2,7 @@ package main;
 
 import java.awt.Graphics;
 import java.awt.Point;
+import java.util.ArrayList;
 
 public abstract class Bullet {
 	private double speed;
@@ -10,26 +11,51 @@ public abstract class Bullet {
 	private boolean splash;
 	private int splashRandge;
 	private Point point;
-	Bullet(double speed, double direction,int damage, boolean splash,int splashRange,Point start){
-		this.speed=speed;
-		this.direction=direction;
-		this.damage=damage;
-		this.splash=splash;
-		this.splashRandge=splashRange;
-		this.point=start;
+	private Tower tower;
+
+	Bullet(double speed, double direction, int damage, boolean splash,
+			int splashRange, Point start, Tower t) {
+		this.speed = speed;
+		this.direction = direction;
+		this.damage = damage;
+		this.splash = splash;
+		this.splashRandge = splashRange;
+		this.point = start;
+		this.tower=t;
 	}
+
 	public abstract void draw(Graphics g);
+
 	public abstract void tick();
-	public Point getPoint(){
+
+	public Point getPoint() {
 		return point;
 	}
-	public void setPoint(Point p){
-		point=p;
+
+	public void setPoint(Point p) {
+		point = p;
 	}
-	public double getDirection(){
+
+	public double getDirection() {
 		return direction;
 	}
-	public double getSpeed(){
+
+	public double getSpeed() {
 		return speed;
+	}
+	public Tower getTower(){
+		return tower;
+	}
+
+	public void checkCollision(ArrayList<Blob> blobs) {
+		for (Blob b : blobs) {
+			if(b.getPoint().distance(getPoint())<=10){
+				b.damage(damage);
+				remove();
+			}
+		}
+	}
+	public void remove(){
+		getTower().getBullets().remove(this);
 	}
 }

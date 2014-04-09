@@ -12,7 +12,13 @@ public class Player {
 		enemyBlobs = e;
 		playerBlobs = p;
 	}
-	
+	public void tick(){
+		for(int i=0;i<getBlobs().size();i++){
+			if(getBlobs().get(i).getHealth()<=0){
+				getBlobs().remove(i);
+			}
+		}
+	}
 	public void addTower(Tower t){
 		towers.add(t);
 	}
