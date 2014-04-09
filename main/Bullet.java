@@ -26,7 +26,15 @@ public abstract class Bullet {
 
 	public abstract void draw(Graphics g);
 
-	public abstract void tick();
+	public void tick(){
+		Point newPoint=new Point();
+		newPoint.setLocation(this.getPoint().getX()+getSpeed()*Math.cos(getDirection()),this.getPoint().getY()+getSpeed()*Math.sin(getDirection()));
+		setPoint(newPoint);
+		checkCollision(getTower().getPlayer().getBlobs());
+		if(getPoint().distance(getTower().getPoint())>getTower().getRange()){
+			remove();
+		}
+	}
 
 	public Point getPoint() {
 		return point;

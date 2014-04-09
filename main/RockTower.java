@@ -6,7 +6,6 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 public class RockTower extends Tower {
-	private int bulletSpeed;
 	private int tick=0;
 
 	private class Rock extends Bullet {
@@ -18,16 +17,6 @@ public class RockTower extends Tower {
 			g.setColor(new Color(117, 46, 7));
 			g.fillOval((int) this.getPoint().getX() - 2, (int) this.getPoint()
 					.getY() - 2, 4, 4);
-		}
-
-		public void tick() {
-			Point newPoint=new Point();
-			newPoint.setLocation(this.getPoint().getX()+getSpeed()*Math.cos(getDirection()),this.getPoint().getY()+getSpeed()*Math.sin(getDirection()));
-			setPoint(newPoint);
-			checkCollision(getPlayer().getBlobs());
-			if(getPoint().distance(getTower().getPoint())>getTower().getRange()){
-				remove();
-			}
 		}
 
 	}
@@ -49,26 +38,6 @@ public class RockTower extends Tower {
 		if (closest != null) {
 			getBullets().add(new Rock(getSpeed(), getDirection(getPoint(),
 					closest.getPoint()), getDamage(), getPoint(),this));
-		}
-	}
-
-	private Blob getTarget(ArrayList<Blob> blobs) {
-		Point p = getPoint();
-		double distance = getRange();
-		for (Blob b : blobs) {
-			double test = p.distance(b.getPoint());
-			if (test < distance) {
-				return b;
-			}
-		}
-		return null;
-	}
-
-	private double getDirection(Point p1, Point p2) {
-		if(p1.getX()<=p2.getX()){
-			return Math.atan((p2.getY()-p1.getY())/(p2.getX()-p1.getX()));
-		}else{
-			return (Math.atan((p2.getY()-p1.getY())/(p2.getX()-p1.getX()))+Math.PI);
 		}
 	}
 

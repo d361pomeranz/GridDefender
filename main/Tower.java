@@ -38,6 +38,24 @@ public abstract class Tower {
 				+ getPlayer().getGrid().sideLength() / 2, getPlayer().getGrid()
 				.sideLength() * getY() + getPlayer().getGrid().sideLength() / 2);
 	}
+	public Blob getTarget(ArrayList<Blob> blobs) {
+		Point p = getPoint();
+		double distance = getRange();
+		for (Blob b : blobs) {
+			double test = p.distance(b.getPoint());
+			if (test < distance) {
+				return b;
+			}
+		}
+		return null;
+	}
+	public double getDirection(Point p1, Point p2) {
+		if(p1.getX()<=p2.getX()){
+			return Math.atan((p2.getY()-p1.getY())/(p2.getX()-p1.getX()));
+		}else{
+			return (Math.atan((p2.getY()-p1.getY())/(p2.getX()-p1.getX()))+Math.PI);
+		}
+	}
 
 	public abstract void draw(Graphics g);
 	public abstract void shoot();
