@@ -11,22 +11,20 @@ public abstract class Tower {
 	private int xPos;
 	private int yPos;
 	private Player player;
-	private ArrayList<Bullet> bullets=new ArrayList<Bullet>();
+	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	private boolean inPlay = false;
 	private int towerIndex;
 
-	Tower(int x, int y, Player p) {
-		xPos = x;
-		yPos = y;
+	Tower(Player p, int ti) {
 		player = p;
-		towerIndex = p.getTowers().indexOf(this);
+		towerIndex = ti;
 	}
-	
-	public boolean inPlay(){
+
+	public boolean inPlay() {
 		return inPlay;
 	}
-	
-	public void setInPlay(){
+
+	public void setInPlay() {
 		inPlay = !inPlay;
 	}
 
@@ -38,17 +36,20 @@ public abstract class Tower {
 		return yPos;
 	}
 
-	public Player getPlayer(){
+	public Player getPlayer() {
 		return player;
 	}
-	public ArrayList<Bullet> getBullets(){
+
+	public ArrayList<Bullet> getBullets() {
 		return bullets;
 	}
+
 	public Point getPoint() {
 		return new Point(player.getGrid().sideLength() * getX()
 				+ player.getGrid().sideLength() / 2, player.getGrid()
 				.sideLength() * getY() + player.getGrid().sideLength() / 2);
 	}
+
 	public Blob getTarget(ArrayList<Blob> blobs) {
 		Point p = getPoint();
 		double distance = getRange();
@@ -60,28 +61,37 @@ public abstract class Tower {
 		}
 		return null;
 	}
+
 	public double getDirection(Point p1, Point p2) {
-		if(p1.getX()<=p2.getX()){
-			return Math.atan((p2.getY()-p1.getY())/(p2.getX()-p1.getX()));
-		}else{
-			return (Math.atan((p2.getY()-p1.getY())/(p2.getX()-p1.getX()))+Math.PI);
+		if (p1.getX() <= p2.getX()) {
+			return Math.atan((p2.getY() - p1.getY()) / (p2.getX() - p1.getX()));
+		} else {
+			return (Math
+					.atan((p2.getY() - p1.getY()) / (p2.getX() - p1.getX())) + Math.PI);
 		}
 	}
-	
-	public void uiAdjust(){
+
+	public void uiAdjust() {
 		Grid g = player.getGrid();
-		yPos = g.getUI().y + g.sideLength()/2 + 5 + (towerIndex / 4) * (g.sideLength() + 5);
-		xPos = g.getUI().x + 5 + (towerIndex % 4) * (g.sideLength() + 5);
-		System.out.println("adjusting");
+		yPos = g.getUI().y + g.sideLength() / 2 + 5 + (towerIndex / 4)
+				* (g.sideLength() + 5);
+		xPos = g.getUI().x + g.sideLength()/10 + (towerIndex % 4)
+				* (g.sideLength() + g.sideLength()/10);
 	}
 
 	public abstract void draw(Graphics g);
+
 	public abstract void shoot();
+
 	public abstract int getRange();
+
 	public abstract int getDamage();
+
 	public abstract void tick();
+
 	public abstract double getSpeed();
-	public int getLevel(){
+
+	public int getLevel() {
 		return level;
 	}
 

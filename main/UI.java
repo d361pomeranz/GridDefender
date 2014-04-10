@@ -48,13 +48,16 @@ public class UI {
 			x = (int) (grid.getScreen().getMouse().getX() - dx);
 			y = (int) (grid.getScreen().getMouse().getY() - dy);
 		}
+		for (int i = 0; i < player.getTowers().size(); i++)
+			if (player.getTowers().get(i).inPlay() == false)
+				player.getTowers().get(i).uiAdjust();
 	}
 
 	public boolean onBar(Point p) {
 		if (p.getX() > x && p.getX() < x + 4 * grid.sideLength())
 			if (p.getY() > y && p.getY() < y + grid.sideLength() / 2) {
-				dx = (int) (p.getX()-x);
-				dy = (int) (p.getY()-y);
+				dx = (int) (p.getX() - x);
+				dy = (int) (p.getY() - y);
 				return true;
 			}
 		return false;
@@ -65,9 +68,10 @@ public class UI {
 			g.setColor(Color.LIGHT_GRAY);
 			g.fillRect(x, y, (int) (grid.sideLength() * 4.5),
 					(int) (grid.sideLength() * 4.5));
-			for (int i = 0; i < towers.size(); i++){
-				towers.get(i).draw(g);
-			}
+			for (int i = 0; i < towers.size(); i++)
+				if (towers.get(i).inPlay() == false){
+					towers.get(i).draw(g);
+				}
 		}
 		g.setColor(Color.GRAY);
 		g.fillRect(x, y, (int) (grid.sideLength() * 4.5), grid.sideLength() / 2);

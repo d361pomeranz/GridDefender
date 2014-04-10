@@ -21,8 +21,8 @@ public class RockTower extends Tower {
 
 	}
 
-	RockTower(int x, int y, Player p) {
-		super(x, y, p);
+	RockTower(Player p, int ti) {
+		super(p, ti);
 	}
 	public void tick(){
 		tick++;
@@ -42,8 +42,8 @@ public class RockTower extends Tower {
 	}
 
 	public void draw(Graphics g) {
-		int xStart = getPlayer().getGrid().sideLength() * getX();
-		int yStart = getPlayer().getGrid().sideLength() * getY();
+		int xStart = getX();
+		int yStart = getY();
 		int sideLength = getPlayer().getGrid().sideLength();
 		g.setColor(new Color(110, 91, 16));
 		g.fillRect(xStart, yStart, sideLength, sideLength);

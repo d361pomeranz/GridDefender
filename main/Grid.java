@@ -29,10 +29,11 @@ public class Grid {
 		placeBases();
 		cPlayer = new Player(this, hBlobs, cBlobs);
 		player = new Player(this, cBlobs, hBlobs);
-		player.addTower(new RockTower(25, 6, player));
-		player.addTower(new RockTower(25, 6, player));
-		player.addTower(new RockTower(25, 6, player));
-		player.addTower(new RockTower(25, 6, player));
+		player.addTower(new RockTower(player, 0));
+		player.addTower(new RockTower(player, 1));
+		player.addTower(new RockTower(player, 2));
+		player.addTower(new RockTower(player, 3));
+		player.addTower(new RockTower(player, 4));
 		ui = new UI(player);
 	}
 
@@ -212,8 +213,6 @@ public class Grid {
 		for (int i = 0; i < player.getTowers().size(); i++)
 			if (player.getTowers().get(i).inPlay())
 				player.getTowers().get(i).tick();
-			else
-				player.getTowers().get(i).uiAdjust();
 		for (int i = 0; i < cPlayer.getTowers().size(); i++)
 			if (cPlayer.getTowers().get(i).inPlay())
 				cPlayer.getTowers().get(i).tick();
@@ -245,7 +244,8 @@ public class Grid {
 			b.draw(g);
 		ui.draw(g);
 		for (int i = 0; i < player.getTowers().size(); i++)
-			player.getTowers().get(i).draw(g);
+			if (player.getTowers().get(i).inPlay())
+				player.getTowers().get(i).draw(g);
 		
 	}
 
