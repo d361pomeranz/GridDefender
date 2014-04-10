@@ -13,10 +13,10 @@ public class UI {
 	private ArrayList<Tower> towers;
 	private boolean open = true;
 	private boolean mouseDownOnBar = false;
-	int x = 10;
-	int y = 10;
-	int dx = 0;
-	int dy = 0;
+	public static int x = 10;
+	public static int y = 10;
+	private int dx = 0;
+	private int dy = 0;
 
 	public UI(Player p) {
 		player = p;
@@ -65,6 +65,9 @@ public class UI {
 			g.setColor(Color.LIGHT_GRAY);
 			g.fillRect(x, y, (int) (grid.sideLength() * 4.5),
 					(int) (grid.sideLength() * 4.5));
+			for (int i = 0; i < towers.size(); i++){
+				towers.get(i).draw(g);
+			}
 		}
 		g.setColor(Color.GRAY);
 		g.fillRect(x, y, (int) (grid.sideLength() * 4.5), grid.sideLength() / 2);

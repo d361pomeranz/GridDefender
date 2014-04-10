@@ -30,10 +30,13 @@ public class Grid {
 		cPlayer = new Player(this, hBlobs, cBlobs);
 		player = new Player(this, cBlobs, hBlobs);
 		player.addTower(new RockTower(25, 6, player));
+		player.addTower(new RockTower(25, 6, player));
+		player.addTower(new RockTower(25, 6, player));
+		player.addTower(new RockTower(25, 6, player));
 		ui = new UI(player);
 	}
-	
-	public GameScreen getScreen(){
+
+	public GameScreen getScreen() {
 		return gameScreen;
 	}
 
@@ -206,11 +209,18 @@ public class Grid {
 			hBlobs.add(new Blob(100, 5, this, false));
 			cBlobs.add(new Blob(100, 5, this, true));
 		}
-		for (Tower t : player.getTowers())
-			t.tick();
+		for (int i = 0; i < player.getTowers().size(); i++)
+			if (player.getTowers().get(i).inPlay())
+				player.getTowers().get(i).tick();
+			else
+				player.getTowers().get(i).uiAdjust();
+		for (int i = 0; i < cPlayer.getTowers().size(); i++)
+			if (cPlayer.getTowers().get(i).inPlay())
+				cPlayer.getTowers().get(i).tick();
 		player.tick();
-		ticks++;
 		ui.tick();
+		ticks++;
+		
 	}
 
 	public void draw(Graphics g) {
@@ -233,9 +243,10 @@ public class Grid {
 			b.draw(g);
 		for (Blob b : hBlobs)
 			b.draw(g);
-		for (Tower t : player.getTowers())
-			t.draw(g);
 		ui.draw(g);
+		for (int i = 0; i < player.getTowers().size(); i++)
+			player.getTowers().get(i).draw(g);
+		
 	}
 
 	public Base getHBase() {

@@ -12,11 +12,22 @@ public abstract class Tower {
 	private int yPos;
 	private Player player;
 	private ArrayList<Bullet> bullets=new ArrayList<Bullet>();
+	private boolean inPlay = false;
+	private int towerIndex;
 
 	Tower(int x, int y, Player p) {
 		xPos = x;
 		yPos = y;
 		player = p;
+		towerIndex = p.getTowers().indexOf(this);
+	}
+	
+	public boolean inPlay(){
+		return inPlay;
+	}
+	
+	public void setInPlay(){
+		inPlay = !inPlay;
 	}
 
 	public int getX() {
@@ -34,9 +45,9 @@ public abstract class Tower {
 		return bullets;
 	}
 	public Point getPoint() {
-		return new Point(getPlayer().getGrid().sideLength() * getX()
-				+ getPlayer().getGrid().sideLength() / 2, getPlayer().getGrid()
-				.sideLength() * getY() + getPlayer().getGrid().sideLength() / 2);
+		return new Point(player.getGrid().sideLength() * getX()
+				+ player.getGrid().sideLength() / 2, player.getGrid()
+				.sideLength() * getY() + player.getGrid().sideLength() / 2);
 	}
 	public Blob getTarget(ArrayList<Blob> blobs) {
 		Point p = getPoint();
@@ -55,6 +66,13 @@ public abstract class Tower {
 		}else{
 			return (Math.atan((p2.getY()-p1.getY())/(p2.getX()-p1.getX()))+Math.PI);
 		}
+	}
+	
+	public void uiAdjust(){
+		Grid g = player.getGrid();
+		yPos = g.getUI().y + g.sideLength()/2 + 5 + (towerIndex / 4) * (g.sideLength() + 5);
+		xPos = g.getUI().x + 5 + (towerIndex % 4) * (g.sideLength() + 5);
+		System.out.println("adjusting");
 	}
 
 	public abstract void draw(Graphics g);
