@@ -15,8 +15,8 @@ public class UI {
 	private boolean mouseDownOnBar = false;
 	int x = 10;
 	int y = 10;
-	private Point lastPosition = new Point(x, y);
-	private Point currentPosition = new Point(x, y);
+	int dx = 0;
+	int dy = 0;
 
 	public UI(Player p) {
 		player = p;
@@ -30,9 +30,12 @@ public class UI {
 
 	public boolean onBox(Point p) {
 		if (p.getX() > x + grid.sideLength() * 4
-				&& p.getX() < x + grid.sideLength() * 4.5)
-			if (p.getY() > y && p.getY() < y + grid.sideLength() / 2)
+				&& p.getX() < x + grid.sideLength() * 4.5) {
+			if (p.getY() > y && p.getY() < y + grid.sideLength() / 2) {
 				return true;
+			}
+		}
+
 		return false;
 	}
 
@@ -42,15 +45,16 @@ public class UI {
 
 	public void tick() {
 		if (mouseDownOnBar) {
-			x = (int) (grid.getScreen().getMouse().getX());
-			y = (int) (grid.getScreen().getMouse().getY());
+			x = (int) (grid.getScreen().getMouse().getX() - dx);
+			y = (int) (grid.getScreen().getMouse().getY() - dy);
 		}
 	}
 
 	public boolean onBar(Point p) {
 		if (p.getX() > x && p.getX() < x + 4 * grid.sideLength())
-			if (p.getY() > y && p.getY() < y + grid.sideLength() / 2){
-				lastPosition = p;
+			if (p.getY() > y && p.getY() < y + grid.sideLength() / 2) {
+				dx = (int) (p.getX()-x);
+				dy = (int) (p.getY()-y);
 				return true;
 			}
 		return false;
