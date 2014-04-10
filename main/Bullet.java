@@ -57,7 +57,7 @@ public abstract class Bullet {
 
 	public void checkCollision(ArrayList<Blob> blobs) {
 		for (Blob b : blobs) {
-			if(b.getPoint().distance(getPoint())<=10){
+			if(b.getPoint().distance(getPoint())<=15){
 				b.damage(damage);
 				remove();
 			}
