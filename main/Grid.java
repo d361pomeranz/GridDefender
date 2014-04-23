@@ -29,8 +29,8 @@ public class Grid {
 		placeBases();
 		cPlayer = new Player(this, hBlobs, cBlobs);
 		player = new Player(this, cBlobs, hBlobs);
-		player.addTower(new RockTower(player, 0));
-		player.addTower(new RockTower(player, 1));
+		player.addTower(new LightningWizard(player, 0));
+		player.addTower(new ArrowTower(player, 1));
 		player.addTower(new RockTower(player, 2));
 		player.addTower(new RockTower(player, 3));
 		player.addTower(new RockTower(player, 4));

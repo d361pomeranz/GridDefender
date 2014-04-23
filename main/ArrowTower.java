@@ -26,8 +26,8 @@ public class ArrowTower extends Tower {
 	}
 
 	public void draw(Graphics g) {
-		int xStart = getPlayer().getGrid().sideLength() * getX();
-		int yStart = getPlayer().getGrid().sideLength() * getY();
+		int xStart = getX();
+		int yStart = getY();
 		int sideLength = getPlayer().getGrid().sideLength();
 		g.setColor(new Color(87, 55, 10));
 		g.fillRect(xStart, yStart, sideLength, sideLength);
