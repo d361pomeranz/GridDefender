@@ -34,6 +34,9 @@ public class GameScreen extends GDScreen {
 			System.exit(0);
 		if (grid.getUI().onBox(getMouse()))
 			grid.getUI().alter();
+		if (grid.getUI().open())
+			if (grid.getUI().getTowerOn(getMouse()) != -1)
+				grid.getUI().towerClicked(grid.getUI().getTowerOn(getMouse()));
 	}
 
 	public void mouseEntered(MouseEvent e) {

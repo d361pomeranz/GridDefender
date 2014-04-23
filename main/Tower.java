@@ -23,6 +23,10 @@ public abstract class Tower {
 	public boolean inPlay() {
 		return inPlay;
 	}
+	
+	public int index(){
+		return towerIndex;
+	}
 
 	public void setInPlay() {
 		inPlay = !inPlay;
@@ -42,6 +46,15 @@ public abstract class Tower {
 
 	public ArrayList<Bullet> getBullets() {
 		return bullets;
+	}
+
+	public boolean onTower(Point p) {
+		if (p.getX() > xPos * player.getGrid().sideLength())
+			if (p.getX() < xPos + 1 * player.getGrid().sideLength())
+				if (p.getY() > yPos * player.getGrid().sideLength())
+					if (p.getY() < yPos + 1 * player.getGrid().sideLength())
+						return true;
+		return false;
 	}
 
 	public Point getPoint() {
@@ -75,8 +88,8 @@ public abstract class Tower {
 		Grid g = player.getGrid();
 		yPos = g.getUI().y + g.sideLength() / 2 + 5 + (towerIndex / 4)
 				* (g.sideLength() + 5);
-		xPos = g.getUI().x + g.sideLength()/10 + (towerIndex % 4)
-				* (g.sideLength() + g.sideLength()/10);
+		xPos = g.getUI().x + g.sideLength() / 10 + (towerIndex % 4)
+				* (g.sideLength() + g.sideLength() / 10);
 	}
 
 	public abstract void draw(Graphics g);

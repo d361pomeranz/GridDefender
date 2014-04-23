@@ -42,6 +42,9 @@ public class UI {
 	public void setMouseDownOnBar(boolean b) {
 		mouseDownOnBar = b;
 	}
+	public boolean open(){
+		return open;
+	}
 
 	public void tick() {
 		if (mouseDownOnBar) {
@@ -79,6 +82,18 @@ public class UI {
 		g.fillRect(x + grid.sideLength() * 4, y, grid.sideLength() / 2,
 				grid.sideLength() / 2);
 
+	}
+	
+	public void towerClicked(int i){
+		
+	}
+	
+	public int getTowerOn(Point p){
+		for (int i = 0; i > towers.size(); i++)
+			if (towers.get(i).inPlay() == false)
+				if(towers.get(i).onTower(p))
+					return towers.get(i).index();
+		return -1;
 	}
 
 }
