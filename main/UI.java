@@ -42,7 +42,8 @@ public class UI {
 	public void setMouseDownOnBar(boolean b) {
 		mouseDownOnBar = b;
 	}
-	public boolean open(){
+
+	public boolean open() {
 		return open;
 	}
 
@@ -72,8 +73,11 @@ public class UI {
 			g.fillRect(x, y, (int) (grid.sideLength() * 4.5),
 					(int) (grid.sideLength() * 4.5));
 			for (int i = 0; i < towers.size(); i++)
-				if (towers.get(i).inPlay() == false){
-					towers.get(i).draw(g);
+				if (towers.get(i).inPlay() == false) {
+					if (towers.get(i).clicked())
+						towers.get(i).drawClicked(g);
+					else
+						towers.get(i).draw(g);
 				}
 		}
 		g.setColor(Color.GRAY);
@@ -83,16 +87,20 @@ public class UI {
 				grid.sideLength() / 2);
 
 	}
-	
-	public void towerClicked(int i){
-		
+
+	public void towerClicked(int i) {
+		towers.get(i).click();
 	}
-	
-	public int getTowerOn(Point p){
-		for (int i = 0; i > towers.size(); i++)
-			if (towers.get(i).inPlay() == false)
-				if(towers.get(i).onTower(p))
+
+	public int getTowerOn(Point p) {
+		for (int i = 0; i < towers.size(); i++) {
+			System.out.println(towers.get(i).onTower(p));
+			if (towers.get(i).inPlay() == false) {
+				if (towers.get(i).onTower(p)) {
 					return towers.get(i).index();
+				}
+			}
+		}
 		return -1;
 	}
 

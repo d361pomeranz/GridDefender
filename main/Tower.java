@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public abstract class Tower {
 	private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 	private boolean inPlay = false;
 	private int towerIndex;
+	private boolean clicked;
 
 	Tower(Player p, int ti) {
 		player = p;
@@ -47,12 +49,23 @@ public abstract class Tower {
 	public ArrayList<Bullet> getBullets() {
 		return bullets;
 	}
+	
+	public boolean clicked(){
+		return clicked;
+	}
+	
+	public void click(){
+		System.out.println("click");
+		clicked = !clicked;
+	}
 
 	public boolean onTower(Point p) {
-		if (p.getX() > xPos * player.getGrid().sideLength())
-			if (p.getX() < xPos + 1 * player.getGrid().sideLength())
+		System.out.println(p.getX());
+		System.out.println("tower pos" + getX());
+		if (p.getX() > getY() * player.getGrid().sideLength())
+			if (p.getX() < (xPos + 1) * player.getGrid().sideLength())
 				if (p.getY() > yPos * player.getGrid().sideLength())
-					if (p.getY() < yPos + 1 * player.getGrid().sideLength())
+					if (p.getY() < (yPos + 1) * player.getGrid().sideLength())
 						return true;
 		return false;
 	}
@@ -86,10 +99,13 @@ public abstract class Tower {
 
 	public void uiAdjust() {
 		Grid g = player.getGrid();
-		yPos = g.getUI().y + g.sideLength() / 2 + 5 + (towerIndex / 4)
-				* (g.sideLength() + 5);
-		xPos = g.getUI().x + g.sideLength() / 10 + (towerIndex % 4)
-				* (g.sideLength() + g.sideLength() / 10);
+		yPos = g.getUI().y + g.sideLength() / 2 + 5 + (towerIndex / 4) * (g.sideLength() + 5);
+		xPos = g.getUI().x + g.sideLength() / 10 + (towerIndex % 4) * (g.sideLength() + g.sideLength() / 10);
+	}
+	
+	public void drawClicked(Graphics g){
+		g.setColor(Color.DARK_GRAY);
+		g.fillRect(getX() * player.getGrid().sideLength(), getY()* player.getGrid().sideLength(), player.getGrid().sideLength(), player.getGrid().sideLength());
 	}
 
 	public abstract void draw(Graphics g);

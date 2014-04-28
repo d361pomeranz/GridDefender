@@ -61,7 +61,7 @@ public class Grid {
 			noBueno[2][i] = true;
 			noBueno[xBoxes - 3][i] = true;
 		}
-		int turnNum = 7;
+		int turnNum = (int) (Math.random()*11) + 1;
 		Point[] turns = new Point[turnNum];
 		int turnCount = 0;
 		while (turnCount < turnNum) {
