@@ -9,18 +9,15 @@ public class LightningWizard extends Tower {
 	private int tick = 0;
 
 	private class LightningBolt extends Bullet {
-		LightningBolt(double speed, double direction, int damage, Point start,
-				Tower t) {
+		private Point targ;
+		LightningBolt(double speed, double direction, int damage, Point start, Tower t, Point target) {
 			super(speed, direction, damage, false, 0, start, t);
+			targ=target;
 		}
 
 		public void draw(Graphics g) {
-			g.setColor(new Color(87, 55, 10));
-			g.drawLine(
-					(int) (getPoint().getX() - 2 * Math.cos(getDirection())),
-					(int) (getPoint().getY() - 2 * Math.sin(getDirection())),
-					(int) (getPoint().getX() + 2 * Math.cos(getDirection())),
-					(int) (getPoint().getY() + 2 * Math.sin(getDirection())));
+			g.setColor(Color.cyan);
+			g.drawLine((int)getPoint().getX(),(int)getPoint().getY(),(int)targ.getX(),(int)targ.getY());
 		}
 
 	}
@@ -59,7 +56,7 @@ public class LightningWizard extends Tower {
 			direction = getDirection(getPoint(), closest.getPoint());
 			getBullets().add(
 					new LightningBolt(getSpeed(), direction, getDamage(),
-							getPoint(), this));
+							getPoint(), this,closest.getPoint()));
 		}
 	}
 
