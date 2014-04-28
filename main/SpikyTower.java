@@ -2,8 +2,24 @@ package main;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 
 public class SpikyTower extends Tower{
+	private class Spike extends Bullet {
+		Spike(double speed, double direction, int damage, Point start, Tower t) {
+			super(speed, direction, damage, false, 0, start,t);
+		}
+
+		public void draw(Graphics g) {
+			g.setColor(new Color(87, 55, 10));
+			g.drawLine((int) (getPoint().getX() - 2 * Math.cos(getDirection())),
+					(int) (getPoint().getY() - 2 * Math.sin(getDirection())),
+					(int) (getPoint().getX() + 2 * Math.cos(getDirection())),
+					(int) (getPoint().getY() + 2 * Math.sin(getDirection())));
+		}
+
+	}
+	int tick=0;
 	SpikyTower(Player p, int ti) {
 		super(p, ti);
 	}
@@ -15,40 +31,31 @@ public class SpikyTower extends Tower{
 		g.fillOval(xStart+10, yStart+10, sideLength-20, sideLength-20);
 		g.setColor(Color.pink);
 		g.fillOval(xStart+15, yStart+15, sideLength-30, sideLength-30);
-		g.setColor(Color.yellow);
-		for (int i = 0; i < 10; i+=2) {
-			
+	}
+	public void shoot() {
+		for(int i=0;i<10;i++){
+			getBullets().add(new Spike(getSpeed(),(i*Math.PI/5),getDamage(),getPoint(),this));
 		}
 	}
-
-	@Override
-	public void shoot() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public int getRange() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 50;
 	}
 
-	@Override
 	public int getDamage() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 15;
 	}
-
-	@Override
 	public void tick() {
-		// TODO Auto-generated method stub
+		tick++;
+		if(tick%2==0){
+			shoot();
+		}
+		for(int i=0;i<getBullets().size();i++){
+			getBullets().get(i).tick();
+		}
 		
 	}
-
-	@Override
 	public double getSpeed() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 75;
 	}
 
 }
