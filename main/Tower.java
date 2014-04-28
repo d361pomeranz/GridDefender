@@ -20,6 +20,7 @@ public abstract class Tower {
 	Tower(Player p, int ti) {
 		player = p;
 		towerIndex = ti;
+		uiAdjust();
 	}
 
 	public boolean inPlay() {
@@ -60,12 +61,16 @@ public abstract class Tower {
 	}
 
 	public boolean onTower(Point p) {
+		System.out.println(xPos);
 		System.out.println(p.getX());
-		System.out.println("tower pos" + getX());
-		if (p.getX() > getY() * player.getGrid().sideLength())
-			if (p.getX() < (xPos + 1) * player.getGrid().sideLength())
-				if (p.getY() > yPos * player.getGrid().sideLength())
-					if (p.getY() < (yPos + 1) * player.getGrid().sideLength())
+		System.out.println(xPos + player.getGrid().sideLength());
+		System.out.println(yPos);
+		System.out.println(p.getY());
+		System.out.println(yPos + player.getGrid().sideLength());
+		if (p.getX() > xPos )
+			if (p.getX() < (xPos + player.getGrid().sideLength()))
+				if (p.getY() > yPos)
+					if (p.getY() < (yPos + player.getGrid().sideLength()))
 						return true;
 		return false;
 	}
@@ -105,7 +110,11 @@ public abstract class Tower {
 	
 	public void drawClicked(Graphics g){
 		g.setColor(Color.DARK_GRAY);
-		g.fillRect(getX() * player.getGrid().sideLength(), getY()* player.getGrid().sideLength(), player.getGrid().sideLength(), player.getGrid().sideLength());
+		g.fillRect(getX(), getY(), player.getGrid().sideLength(), player.getGrid().sideLength());
+	}
+	
+	public void setClick(boolean b){
+		clicked = b;
 	}
 
 	public abstract void draw(Graphics g);

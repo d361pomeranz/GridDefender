@@ -88,13 +88,16 @@ public class UI {
 
 	}
 
-	public void towerClicked(int i) {
-		towers.get(i).click();
+	public void towerClicked(int z) {
+		for (int i = 0; i < towers.size(); i++) {
+			towers.get(i).setClick(false);
+		}
+		towers.get(z).click();
 	}
 
 	public int getTowerOn(Point p) {
+		
 		for (int i = 0; i < towers.size(); i++) {
-			System.out.println(towers.get(i).onTower(p));
 			if (towers.get(i).inPlay() == false) {
 				if (towers.get(i).onTower(p)) {
 					return towers.get(i).index();
