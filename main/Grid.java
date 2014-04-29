@@ -206,7 +206,7 @@ public class Grid {
 			}
 			b.tick();
 		}
-		if (ticks % 10 == 0 && ticks < 10) {
+		if (ticks % 20 == 0 && ticks < 200) {
 			hBlobs.add(new Blob(100, 5, this, false));
 			cBlobs.add(new Blob(100, 5, this, true));
 		}

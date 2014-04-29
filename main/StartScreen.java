@@ -6,15 +6,12 @@ import java.awt.event.MouseEvent;
 
 public class StartScreen extends GDScreen {
 	private Button newGameButton;
-	private Button loadGameButton;
 	private Button exitButton;
 
 	public StartScreen(GDFrame frame) {
 		super(frame);
 		newGameButton = new Button(frame.getWidth() / 2 - 200,
 				frame.getHeight() / 2, 400, 80, "New Game");
-		loadGameButton = new Button(frame.getWidth() / 2 - 200,
-				frame.getHeight() / 2 + 120, 400, 80, "Load Game");
 		exitButton = new Button(frame.getWidth() - 30, 0, 30, 30, "X");
 		exitButton.setBGColor(Color.red);
 		exitButton.setTextColor(Color.white);
@@ -29,7 +26,6 @@ public class StartScreen extends GDScreen {
 		g.setColor(Color.LIGHT_GRAY);
 		g.fillRect(0, 0, getWidth(), getHeight());
 		newGameButton.draw(g);
-		loadGameButton.draw(g);
 		exitButton.draw(g);
 	}
 
