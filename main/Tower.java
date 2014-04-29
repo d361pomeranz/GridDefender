@@ -61,12 +61,6 @@ public abstract class Tower {
 	}
 
 	public boolean onTower(Point p) {
-		System.out.println(xPos);
-		System.out.println(p.getX());
-		System.out.println(xPos + player.getGrid().sideLength());
-		System.out.println(yPos);
-		System.out.println(p.getY());
-		System.out.println(yPos + player.getGrid().sideLength());
 		if (p.getX() > xPos )
 			if (p.getX() < (xPos + player.getGrid().sideLength()))
 				if (p.getY() > yPos)
