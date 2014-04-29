@@ -28,9 +28,9 @@ public class SpikyTower extends Tower{
 		int yStart = getY();
 		int sideLength = getPlayer().getGrid().sideLength();
 		g.setColor(Color.black);
-		g.fillOval(xStart+10, yStart+10, sideLength-20, sideLength-20);
+		g.fillOval(xStart+5, yStart+5, sideLength-10, sideLength-10);
 		g.setColor(Color.pink);
-		g.fillOval(xStart+15, yStart+15, sideLength-30, sideLength-30);
+		g.fillOval(xStart+10, yStart+10, sideLength-20, sideLength-20);
 	}
 	public void shoot() {
 		for(int i=0;i<10;i++){

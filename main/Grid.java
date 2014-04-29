@@ -31,7 +31,7 @@ public class Grid {
 		player = new Player(this, cBlobs, hBlobs);
 		player.addTower(new LightningWizard(player, 0));
 		player.addTower(new ArrowTower(player, 1));
-		player.addTower(new RockTower(player, 2));
+		player.addTower(new SpikyTower(player, 2));
 		player.addTower(new RockTower(player, 3));
 		player.addTower(new RockTower(player, 4));
 		ui = new UI(player);
