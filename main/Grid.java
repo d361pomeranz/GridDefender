@@ -206,9 +206,8 @@ public class Grid {
 			}
 			b.tick();
 		}
-		if (ticks % 12 == 0 && ticks < 600) {
-			hBlobs.add(new Blob(100, 5, this, false));
-			cBlobs.add(new Blob(100, 5, this, true));
+		if (ticks % 5 == 0 && ticks < 600) {
+			cBlobs.add(new Blob(100, (int) (Math.random() * 3) + 5, this, true));
 		}
 		for (int i = 0; i < player.getTowers().size(); i++)
 			if (player.getTowers().get(i).inPlay())

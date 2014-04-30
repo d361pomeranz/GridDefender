@@ -41,7 +41,7 @@ public class ArrowTower extends Tower {
 				(int) (yStart + sideLength / 2 - 10 * Math.sin(direction)),
 				(int) (xStart + sideLength / 2 + 10 * Math.cos(direction)),
 				(int) (yStart + sideLength / 2 + 10 * Math.sin(direction)));
-		if (!inPlay()) {
+		if (inPlay()) {
 			g.setColor(Color.cyan);
 			g.drawOval((int) (getPoint().getX() - getRange()),
 					(int) (getPoint().getY() - getRange()), getRange() * 2,

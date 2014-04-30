@@ -77,7 +77,6 @@ public abstract class Tower {
 		double distance = getRange();
 		for (int i = 0; i < blobs.size(); i++) {
 			double test = p.distance(blobs.get(i).getPoint());
-			System.out.println(p);
 			if (test < distance) {
 				return blobs.get(i);
 			}
