@@ -61,7 +61,7 @@ public class Grid {
 			noBueno[2][i] = true;
 			noBueno[xBoxes - 3][i] = true;
 		}
-		int turnNum = (int) (Math.random()*11) + 1;
+		int turnNum = (int) (Math.random() * 11) + 1;
 		Point[] turns = new Point[turnNum];
 		int turnCount = 0;
 		while (turnCount < turnNum) {
@@ -206,7 +206,7 @@ public class Grid {
 			}
 			b.tick();
 		}
-		if (ticks % 20 == 0 && ticks < 200) {
+		if (ticks % 12 == 0 && ticks < 600) {
 			hBlobs.add(new Blob(100, 5, this, false));
 			cBlobs.add(new Blob(100, 5, this, true));
 		}
@@ -219,7 +219,7 @@ public class Grid {
 		player.tick();
 		ui.tick();
 		ticks++;
-		
+
 	}
 
 	public void draw(Graphics g) {
@@ -246,7 +246,7 @@ public class Grid {
 		for (int i = 0; i < player.getTowers().size(); i++)
 			if (player.getTowers().get(i).inPlay())
 				player.getTowers().get(i).draw(g);
-		
+
 	}
 
 	public Base getHBase() {
@@ -272,6 +272,21 @@ public class Grid {
 
 	public UI getUI() {
 		return ui;
+	}
+
+	public boolean canBePlaced(int px, int py) {
+		if (px >= xBoxes || px < 0)
+			return false;
+		if (py >= yBoxes || py < 0)
+			return false;
+		if (maze[px][py])
+			return false;
+		for (Tower t : player.getTowers())
+			if (px * sideLength == t.getX())
+				if (py * sideLength == t.getY())
+					return false;
+
+		return true;
 	}
 
 }

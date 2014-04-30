@@ -6,11 +6,11 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 public class RockTower extends Tower {
-	private int tick=0;
+	private int tick = 0;
 
 	private class Rock extends Bullet {
 		Rock(double speed, double direction, int damage, Point start, Tower t) {
-			super(speed, direction, damage, false, 0, start,t);
+			super(speed, direction, damage, false, 0, start, t);
 		}
 
 		public void draw(Graphics g) {
@@ -24,20 +24,23 @@ public class RockTower extends Tower {
 	RockTower(Player p, int ti) {
 		super(p, ti);
 	}
-	public void tick(){
+
+	public void tick() {
 		tick++;
-		if(tick%5==0){
+		if (tick % 5 == 0) {
 			shoot();
 		}
-		for(int i=0;i<getBullets().size();i++){
+		for (int i = 0; i < getBullets().size(); i++) {
 			getBullets().get(i).tick();
 		}
 	}
+
 	public void shoot() {
 		Blob closest = getTarget(getPlayer().getBlobs());
 		if (closest != null) {
-			getBullets().add(new Rock(getSpeed(), getDirection(getPoint(),
-					closest.getPoint()), getDamage(), getPoint(),this));
+			getBullets()
+					.add(new Rock(getSpeed(), getDirection(getPoint(),
+							closest.getPoint()), getDamage(), getPoint(), this));
 		}
 	}
 
@@ -49,10 +52,14 @@ public class RockTower extends Tower {
 		g.fillRect(xStart, yStart, sideLength, sideLength);
 		g.setColor(new Color(130, 118, 109));
 		g.fillOval(xStart + 5, yStart + 5, sideLength - 10, sideLength - 10);
-		g.setColor(Color.cyan);
-		g.drawOval((int)(getPoint().getX()-getRange()), (int)(getPoint().getY()-getRange()), getRange()*2, getRange()*2);
-		for (Bullet b : getBullets()) {
-			b.draw(g);
+		if (!inPlay()) {
+			g.setColor(Color.cyan);
+			g.drawOval((int) (getPoint().getX() - getRange()),
+					(int) (getPoint().getY() - getRange()), getRange() * 2,
+					getRange() * 2);
+		}
+		for (int i = 0; i < getBullets().size(); i++) {
+			getBullets().get(i).draw(g);
 		}
 	}
 
@@ -63,7 +70,7 @@ public class RockTower extends Tower {
 	public int getDamage() {
 		return 25;
 	}
-	
+
 	public double getSpeed() {
 		return 30;
 	}

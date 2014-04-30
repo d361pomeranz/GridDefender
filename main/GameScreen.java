@@ -25,6 +25,23 @@ public class GameScreen extends GDScreen {
 		Graphics g = getFrame().getBufferStrategy().getDrawGraphics();
 		g.setColor(new Color(240, 240, 240));
 		g.fillRect(0, 0, getWidth(), getHeight());
+		for (int i = 0; i < grid.getUI().getTowers().size(); i++) {
+			if (grid.getUI().getTowers().get(i).clicked()) {
+				if (getMouse().getY() > 0 && getMouse().getY() < getHeight()) {
+					if (getMouse().getX() > 0 && getMouse().getX() < getWidth()) {
+						int px = (int) (getMouse().getX() / grid.sideLength());
+						int py = (int) (getMouse().getY() / grid.sideLength());
+						g.setColor(new Color(119, 230, 127));
+						if (grid.canBePlaced(px, py))
+							if (!grid.getUI().on(getMouse()))
+								g.fillRect(px * grid.sideLength() + 3, py
+										* grid.sideLength() + 3,
+										grid.sideLength() - 5,
+										grid.sideLength() - 5);
+					}
+				}
+			}
+		}
 		grid.draw(g);
 		exitButton.draw(g);
 	}
@@ -34,9 +51,20 @@ public class GameScreen extends GDScreen {
 			System.exit(0);
 		if (grid.getUI().onBox(getMouse()))
 			grid.getUI().alter();
-		if (grid.getUI().open())
-			if (grid.getUI().getTowerOn(getMouse()) != -1)
-				grid.getUI().towerClicked(grid.getUI().getTowerOn(getMouse()));
+		if (grid.getUI().open()){
+			if (grid.getUI().on(getMouse())){
+				if (grid.getUI().getTowerOn(getMouse()) != -1){
+					grid.getUI().towerClicked(grid.getUI().getTowerOn(getMouse()));
+				}
+			} else {
+				for (int i = 0; i < grid.getUI().getTowers().size(); i++)
+				if (grid.getUI().getTowers().get(i).clicked())
+					if (grid.canBePlaced((int) getMouse().getX() / grid.sideLength(), (int) getMouse().getY() / grid.sideLength()))
+						grid.getUI().getTowers().get(i).place((int) getMouse().getX() / grid.sideLength(), (int) getMouse().getY() / grid.sideLength());
+			}
+			
+		}
+
 	}
 
 	public void mouseEntered(MouseEvent e) {
@@ -53,7 +81,7 @@ public class GameScreen extends GDScreen {
 	}
 
 	public void mouseReleased(MouseEvent e) {
-			grid.getUI().setMouseDownOnBar(false);
+		grid.getUI().setMouseDownOnBar(false);
 	}
 
 }

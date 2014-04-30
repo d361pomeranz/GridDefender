@@ -56,7 +56,6 @@ public abstract class Tower {
 	}
 	
 	public void click(){
-		System.out.println("click");
 		clicked = !clicked;
 	}
 
@@ -70,18 +69,17 @@ public abstract class Tower {
 	}
 
 	public Point getPoint() {
-		return new Point(player.getGrid().sideLength() * getX()
-				+ player.getGrid().sideLength() / 2, player.getGrid()
-				.sideLength() * getY() + player.getGrid().sideLength() / 2);
+		return new Point(getX() + player.getGrid().sideLength() / 2, getY() + player.getGrid().sideLength() / 2);
 	}
 
 	public Blob getTarget(ArrayList<Blob> blobs) {
 		Point p = getPoint();
 		double distance = getRange();
-		for (Blob b : blobs) {
-			double test = p.distance(b.getPoint());
+		for (int i = 0; i < blobs.size(); i++) {
+			double test = p.distance(blobs.get(i).getPoint());
+			System.out.println(p);
 			if (test < distance) {
-				return b;
+				return blobs.get(i);
 			}
 		}
 		return null;
@@ -103,12 +101,23 @@ public abstract class Tower {
 	}
 	
 	public void drawClicked(Graphics g){
-		g.setColor(Color.DARK_GRAY);
-		g.fillRect(getX(), getY(), player.getGrid().sideLength(), player.getGrid().sideLength());
+		draw(g);
+		g.setColor(Color.green);
+		g.drawRect(xPos + 4, yPos + 4, player.getGrid().sideLength() - 8, player.getGrid().sideLength() - 8);
+		g.drawRect(xPos + 5, yPos + 3, player.getGrid().sideLength() - 10, player.getGrid().sideLength() - 6);
+		g.drawRect(xPos + 3, yPos + 5, player.getGrid().sideLength() - 6, player.getGrid().sideLength() - 10);
 	}
 	
 	public void setClick(boolean b){
 		clicked = b;
+	}
+	
+	public void place(int x, int y) {
+		xPos = x * player.getGrid().sideLength();
+		yPos = y * player.getGrid().sideLength();
+		inPlay = true;
+		clicked = false;
+		
 	}
 
 	public abstract void draw(Graphics g);
@@ -126,5 +135,7 @@ public abstract class Tower {
 	public int getLevel() {
 		return level;
 	}
+
+	
 
 }

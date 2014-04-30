@@ -25,7 +25,11 @@ public class UI {
 	}
 
 	public void alter() {
+		if (open)
+			for (int i = 0; i < towers.size(); i++) 
+				towers.get(i).setClick(false);
 		open = !open;
+			
 	}
 
 	public boolean onBox(Point p) {
@@ -37,6 +41,10 @@ public class UI {
 		}
 
 		return false;
+	}
+
+	public ArrayList<Tower> getTowers() {
+		return towers;
 	}
 
 	public void setMouseDownOnBar(boolean b) {
@@ -70,8 +78,7 @@ public class UI {
 	public void draw(Graphics g) {
 		if (open) {
 			g.setColor(Color.LIGHT_GRAY);
-			g.fillRect(x, y, (int) (grid.sideLength() * 4.5),
-					(int) (grid.sideLength() * 4.5));
+			g.fillRect(x, y, (int) (grid.sideLength() * 4.5), (int) (grid.sideLength() * 4.5));
 			for (int i = 0; i < towers.size(); i++)
 				if (towers.get(i).inPlay() == false) {
 					if (towers.get(i).clicked())
@@ -83,9 +90,15 @@ public class UI {
 		g.setColor(Color.GRAY);
 		g.fillRect(x, y, (int) (grid.sideLength() * 4.5), grid.sideLength() / 2);
 		g.setColor(Color.DARK_GRAY);
-		g.fillRect(x + grid.sideLength() * 4, y, grid.sideLength() / 2,
-				grid.sideLength() / 2);
+		g.fillRect(x + grid.sideLength() * 4, y, grid.sideLength() / 2, grid.sideLength() / 2);
 
+	}
+
+	public boolean on(Point p) {
+		if (p.getX() > x && p.getX() < x + (int) (grid.sideLength() * 4.5))
+			if (p.getY() > y && p.getY() < y + (int) (grid.sideLength() * 4.5))
+				return true;
+		return false;
 	}
 
 	public void towerClicked(int z) {
@@ -97,7 +110,6 @@ public class UI {
 	}
 
 	public int getTowerOn(Point p) {
-
 		for (int i = 0; i < towers.size(); i++) {
 			if (towers.get(i).inPlay() == false) {
 				if (towers.get(i).onTower(p)) {
