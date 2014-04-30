@@ -33,6 +33,9 @@ public class SpikyTower extends Tower{
 		g.fillOval(xStart+5, yStart+5, sideLength-10, sideLength-10);
 		g.setColor(Color.pink);
 		g.fillOval(xStart+10, yStart+10, sideLength-20, sideLength-20);
+		for (Bullet b : getBullets()) {
+			b.draw(g);
+		}
 	}
 	public void shoot() {
 		for(int i=0;i<10;i++){
@@ -40,7 +43,7 @@ public class SpikyTower extends Tower{
 		}
 	}
 	public int getRange() {
-		return 50;
+		return 75;
 	}
 
 	public int getDamage() {
@@ -48,7 +51,7 @@ public class SpikyTower extends Tower{
 	}
 	public void tick() {
 		tick++;
-		if(tick%2==0){
+		if(tick%6==0){
 			shoot();
 		}
 		for(int i=0;i<getBullets().size();i++){
@@ -57,7 +60,7 @@ public class SpikyTower extends Tower{
 		
 	}
 	public double getSpeed() {
-		return 75;
+		return 5;
 	}
 
 }
