@@ -7,17 +7,25 @@ import java.awt.Point;
 public class LightningWizard extends Tower {
 	private double direction = Math.PI / 2;
 	private int tick = 0;
+	private boolean zap = false;
 
 	private class LightningBolt extends Bullet {
 		private Point targ;
-		LightningBolt(double speed, double direction, int damage, Point start, Tower t, Point target) {
+
+		LightningBolt(double speed, double direction, int damage, Point start,
+				Tower t, Point target) {
 			super(speed, direction, damage, false, 0, start, t);
-			targ=target;
+			targ = target;
 		}
 
 		public void draw(Graphics g) {
 			g.setColor(Color.cyan);
-			g.drawLine((int)getPoint().getX(),(int)getPoint().getY(),(int)targ.getX(),(int)targ.getY());
+			g.drawLine((int) getPoint().getX()-1, (int) getPoint().getY()-1,
+					(int) targ.getX()-1, (int) targ.getY()-1);
+			g.drawLine((int) getPoint().getX(), (int) getPoint().getY(),
+					(int) targ.getX(), (int) targ.getY());
+			g.drawLine((int) getPoint().getX()+1, (int) getPoint().getY()+1,
+					(int) targ.getX()+1, (int) targ.getY()+1);
 		}
 
 	}
@@ -35,18 +43,27 @@ public class LightningWizard extends Tower {
 		g.setColor(Color.cyan);
 		g.fillOval(xStart, yStart, sideLength, sideLength);
 		g.setColor(Color.yellow);
-		for (int i = 0; i < 10; i+=2) {
+		for (int i = 0; i < 10; i += 2) {
 			g.drawLine(
-					(int) (xStart + sideLength / 2 + sideLength/2
-							* Math.cos(Math.PI * 3 / 2 + (Math.PI * 2 / 5 * i)))+1,
-					(int) (yStart + sideLength / 2 - sideLength/2
+					(int) (xStart + sideLength / 2 + sideLength / 2
+							* Math.cos(Math.PI * 3 / 2 + (Math.PI * 2 / 5 * i))) + 1,
+					(int) (yStart + sideLength / 2 - sideLength / 2
 							* Math.sin(Math.PI * 3 / 2 + (Math.PI * 2 / 5 * i))),
-					(int) (xStart + sideLength / 2 + sideLength/2
+					(int) (xStart + sideLength / 2 + sideLength
+							/ 2
 							* Math.cos(Math.PI * 3 / 2
-									+ (Math.PI * 2 / 5 * (i + 2))))+1,
-					(int) (yStart + sideLength / 2 - sideLength/2
+									+ (Math.PI * 2 / 5 * (i + 2)))) + 1,
+					(int) (yStart + sideLength / 2 - sideLength
+							/ 2
 							* Math.sin(Math.PI * 3 / 2
 									+ (Math.PI * 2 / 5 * (i + 2)))));
+		}
+		if(zap){
+			g.setColor(Color.BLACK);
+			g.drawString("ZAP!", (int)(sideLength*Math.random())+xStart, (int)(sideLength*Math.random())+yStart);
+		}
+		for (Bullet b : getBullets()) {
+			b.draw(g);
 		}
 	}
 
@@ -56,7 +73,7 @@ public class LightningWizard extends Tower {
 			direction = getDirection(getPoint(), closest.getPoint());
 			getBullets().add(
 					new LightningBolt(getSpeed(), direction, getDamage(),
-							getPoint(), this,closest.getPoint()));
+							getPoint(), this, closest.getPoint()));
 		}
 	}
 
@@ -72,6 +89,9 @@ public class LightningWizard extends Tower {
 		tick++;
 		if (tick % 15 == 0) {
 			shoot();
+			zap = true;
+		} else if (tick % 15 == 5) {
+			zap = false;
 		}
 		for (int i = 0; i < getBullets().size(); i++) {
 			getBullets().get(i).tick();
