@@ -8,17 +8,24 @@ public class GameScreen extends GDScreen {
 
 	private Grid grid;
 	private Button exitButton;
+	private Button play;
+	private boolean started = false;
 
 	public GameScreen(GDFrame frame) {
 		super(frame);
 		exitButton = new Button(frame.getWidth() - 30, 0, 30, 30, "X");
 		exitButton.setBGColor(Color.red);
 		exitButton.setTextColor(Color.white);
+		play = new Button(frame.getWidth() - 60, 0, 30, 30, "|>");
+		play.setBGColor(Color.GREEN);
+		play.setTextColor(Color.white);
 		grid = new Grid(this);
 	}
 
 	public void tick() {
-		grid.tick();
+		if (started)
+			grid.tick();
+		grid.getUI().tick();
 	}
 
 	public void draw() {
@@ -44,25 +51,37 @@ public class GameScreen extends GDScreen {
 		}
 		grid.draw(g);
 		exitButton.draw(g);
+		play.draw(g);
 	}
 
 	public void mouseClicked(MouseEvent e) {
 		if (exitButton.onButton(getMouse()))
 			System.exit(0);
+		if (play.onButton(getMouse()))
+			started = true;
 		if (grid.getUI().onBox(getMouse()))
 			grid.getUI().alter();
-		if (grid.getUI().open()){
-			if (grid.getUI().on(getMouse())){
-				if (grid.getUI().getTowerOn(getMouse()) != -1){
-					grid.getUI().towerClicked(grid.getUI().getTowerOn(getMouse()));
+		if (grid.getUI().open()) {
+			if (grid.getUI().on(getMouse())) {
+				if (grid.getUI().getTowerOn(getMouse()) != -1) {
+					grid.getUI().towerClicked(
+							grid.getUI().getTowerOn(getMouse()));
 				}
 			} else {
 				for (int i = 0; i < grid.getUI().getTowers().size(); i++)
-				if (grid.getUI().getTowers().get(i).clicked())
-					if (grid.canBePlaced((int) getMouse().getX() / grid.sideLength(), (int) getMouse().getY() / grid.sideLength()))
-						grid.getUI().getTowers().get(i).place((int) getMouse().getX() / grid.sideLength(), (int) getMouse().getY() / grid.sideLength());
+					if (grid.getUI().getTowers().get(i).clicked())
+						if (grid.canBePlaced(
+								(int) getMouse().getX() / grid.sideLength(),
+								(int) getMouse().getY() / grid.sideLength()))
+							grid.getUI()
+									.getTowers()
+									.get(i)
+									.place((int) getMouse().getX()
+											/ grid.sideLength(),
+											(int) getMouse().getY()
+													/ grid.sideLength());
 			}
-			
+
 		}
 
 	}

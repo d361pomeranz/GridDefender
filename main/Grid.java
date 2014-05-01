@@ -216,7 +216,7 @@ public class Grid {
 			if (cPlayer.getTowers().get(i).inPlay())
 				cPlayer.getTowers().get(i).tick();
 		player.tick();
-		ui.tick();
+		
 		ticks++;
 
 	}
@@ -245,7 +245,6 @@ public class Grid {
 		for (int i = 0; i < player.getTowers().size(); i++)
 			if (player.getTowers().get(i).inPlay())
 				player.getTowers().get(i).draw(g);
-
 	}
 
 	public Base getHBase() {
@@ -284,7 +283,6 @@ public class Grid {
 			if (px * sideLength == t.getX())
 				if (py * sideLength == t.getY())
 					return false;
-
 		return true;
 	}
 
