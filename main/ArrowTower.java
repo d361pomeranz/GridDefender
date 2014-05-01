@@ -27,6 +27,10 @@ public class ArrowTower extends Tower {
 	ArrowTower(Player p, int ti) {
 		super(p, ti);
 	}
+	
+	ArrowTower(Player p, int ti, int x, int y) {
+		super(p, ti, x, y);
+	}
 
 	public void draw(Graphics g) {
 		int xStart = getX();

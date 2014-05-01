@@ -23,6 +23,10 @@ public class SpikyTower extends Tower{
 	SpikyTower(Player p, int ti) {
 		super(p, ti);
 	}
+	
+	SpikyTower(Player p, int ti, int x, int y) {
+		super(p, ti, x, y);
+	}
 	public void draw(Graphics g) {
 		int xStart = getX();
 		int yStart = getY();

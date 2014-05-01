@@ -29,11 +29,6 @@ public class Grid {
 		placeBases();
 		cPlayer = new Player(this, hBlobs, cBlobs);
 		player = new Player(this, cBlobs, hBlobs);
-		player.addTower(new LightningWizard(player, 0));
-		player.addTower(new ArrowTower(player, 1));
-		player.addTower(new SpikyTower(player, 2));
-		player.addTower(new RockTower(player, 3));
-		player.addTower(new RockTower(player, 4));
 		ui = new UI(player);
 	}
 
@@ -206,9 +201,12 @@ public class Grid {
 			}
 			b.tick();
 		}
-		if (ticks % 5 == 0 && ticks < 600) {
-			cBlobs.add(new Blob(100, (int) (Math.random() * 3) + 5, this, true));
+		if (ticks % 3 == 0 && ticks < 1200) {
+			cBlobs.add(new Blob(200, (int) (Math.random() * 2) + 6, this, true));
 		}
+		for (int i = 0; i < ui.getTowers().size(); i++)
+			if (ui.getTowers().get(i).inPlay())
+				ui.getTowers().get(i).tick();
 		for (int i = 0; i < player.getTowers().size(); i++)
 			if (player.getTowers().get(i).inPlay())
 				player.getTowers().get(i).tick();
@@ -242,6 +240,9 @@ public class Grid {
 		for (Blob b : hBlobs)
 			b.draw(g);
 		ui.draw(g);
+		for (int i = 0; i < ui.getTowers().size(); i++)
+			if (ui.getTowers().get(i).inPlay())
+				ui.getTowers().get(i).draw(g);
 		for (int i = 0; i < player.getTowers().size(); i++)
 			if (player.getTowers().get(i).inPlay())
 				player.getTowers().get(i).draw(g);

@@ -49,6 +49,10 @@ public class LightningWizard extends Tower {
 	LightningWizard(Player p, int ti) {
 		super(p, ti);
 	}
+	
+	LightningWizard(Player p, int ti, int x, int y) {
+		super(p, ti, x, y);
+	}
 
 	public void draw(Graphics g) {
 		int xStart = getX();

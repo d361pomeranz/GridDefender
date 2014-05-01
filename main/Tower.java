@@ -23,11 +23,19 @@ public abstract class Tower {
 		uiAdjust();
 	}
 
+	Tower(Player p, int ti, int x, int y) {
+		player = p;
+		towerIndex = ti;
+		xPos = x * player.getGrid().sideLength();
+		yPos = y * player.getGrid().sideLength();
+		inPlay = true;
+	}
+
 	public boolean inPlay() {
 		return inPlay;
 	}
-	
-	public int index(){
+
+	public int index() {
 		return towerIndex;
 	}
 
@@ -50,17 +58,17 @@ public abstract class Tower {
 	public ArrayList<Bullet> getBullets() {
 		return bullets;
 	}
-	
-	public boolean clicked(){
+
+	public boolean clicked() {
 		return clicked;
 	}
-	
-	public void click(){
+
+	public void click() {
 		clicked = !clicked;
 	}
 
 	public boolean onTower(Point p) {
-		if (p.getX() > xPos )
+		if (p.getX() > xPos)
 			if (p.getX() < (xPos + player.getGrid().sideLength()))
 				if (p.getY() > yPos)
 					if (p.getY() < (yPos + player.getGrid().sideLength()))
@@ -69,7 +77,8 @@ public abstract class Tower {
 	}
 
 	public Point getPoint() {
-		return new Point(getX() + player.getGrid().sideLength() / 2, getY() + player.getGrid().sideLength() / 2);
+		return new Point(getX() + player.getGrid().sideLength() / 2, getY()
+				+ player.getGrid().sideLength() / 2);
 	}
 
 	public Blob getTarget(ArrayList<Blob> blobs) {
@@ -95,28 +104,39 @@ public abstract class Tower {
 
 	public void uiAdjust() {
 		Grid g = player.getGrid();
-		yPos = g.getUI().y + g.sideLength() / 2 + 5 + (towerIndex / 4) * (g.sideLength() + 5);
-		xPos = g.getUI().x + g.sideLength() / 10 + (towerIndex % 4) * (g.sideLength() + g.sideLength() / 10);
+		yPos = g.getUI().y + g.sideLength() / 2 + 5 + (towerIndex / 4)
+				* (g.sideLength() + 5);
+		xPos = g.getUI().x + g.sideLength() / 10 + (towerIndex % 4)
+				* (g.sideLength() + g.sideLength() / 10);
 	}
-	
-	public void drawClicked(Graphics g){
+
+	public void drawClicked(Graphics g) {
 		draw(g);
 		g.setColor(Color.green);
-		g.drawRect(xPos + 4, yPos + 4, player.getGrid().sideLength() - 8, player.getGrid().sideLength() - 8);
-		g.drawRect(xPos + 5, yPos + 3, player.getGrid().sideLength() - 10, player.getGrid().sideLength() - 6);
-		g.drawRect(xPos + 3, yPos + 5, player.getGrid().sideLength() - 6, player.getGrid().sideLength() - 10);
+		g.drawRect(xPos + 4, yPos + 4, player.getGrid().sideLength() - 8,
+				player.getGrid().sideLength() - 8);
+		g.drawRect(xPos + 5, yPos + 3, player.getGrid().sideLength() - 10,
+				player.getGrid().sideLength() - 6);
+		g.drawRect(xPos + 3, yPos + 5, player.getGrid().sideLength() - 6,
+				player.getGrid().sideLength() - 10);
 	}
-	
-	public void setClick(boolean b){
+
+	public void setClick(boolean b) {
 		clicked = b;
 	}
-	
+
 	public void place(int x, int y) {
-		xPos = x * player.getGrid().sideLength();
-		yPos = y * player.getGrid().sideLength();
-		inPlay = true;
+		if (this instanceof RockTower) {
+			player.addTower(new RockTower(player, player.getTowers().size(), x, y));
+		} else if (this instanceof SpikyTower) {
+			player.addTower(new SpikyTower(player, player.getTowers().size(), x, y));
+		} else if (this instanceof ArrowTower) {
+			player.addTower(new ArrowTower(player, player.getTowers().size(), x, y));
+		} else {
+			player.addTower(new LightningWizard(player, player.getTowers()
+					.size(), x, y));
+		}
 		clicked = false;
-		
 	}
 
 	public abstract void draw(Graphics g);
@@ -134,7 +154,5 @@ public abstract class Tower {
 	public int getLevel() {
 		return level;
 	}
-
-	
 
 }

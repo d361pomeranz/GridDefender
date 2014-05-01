@@ -24,6 +24,10 @@ public class RockTower extends Tower {
 	RockTower(Player p, int ti) {
 		super(p, ti);
 	}
+	
+	RockTower(Player p, int ti, int x, int y) {
+		super(p, ti, x, y);
+	}
 
 	public void tick() {
 		tick++;

@@ -10,7 +10,7 @@ public class UI {
 
 	private Grid grid;
 	private Player player;
-	private ArrayList<Tower> towers;
+	private ArrayList<Tower> towers = new ArrayList<Tower>();
 	private boolean open = true;
 	private boolean mouseDownOnBar = false;
 	public static int x = 10;
@@ -21,7 +21,10 @@ public class UI {
 	public UI(Player p) {
 		player = p;
 		grid = p.getGrid();
-		towers = p.getTowers();
+		towers.add(new LightningWizard(player, 0));
+		towers.add(new ArrowTower(player, 1));
+		towers.add(new SpikyTower(player, 2));
+		towers.add(new RockTower(player, 3));
 	}
 
 	public void alter() {
@@ -60,9 +63,9 @@ public class UI {
 			x = (int) (grid.getScreen().getMouse().getX() - dx);
 			y = (int) (grid.getScreen().getMouse().getY() - dy);
 		}
-		for (int i = 0; i < player.getTowers().size(); i++)
-			if (player.getTowers().get(i).inPlay() == false)
-				player.getTowers().get(i).uiAdjust();
+		for (int i = 0; i < towers.size(); i++)
+			if (towers.get(i).inPlay() == false)
+				towers.get(i).uiAdjust();
 	}
 
 	public boolean onBar(Point p) {
