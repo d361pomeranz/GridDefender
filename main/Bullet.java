@@ -47,6 +47,9 @@ public abstract class Bullet {
 	public double getDirection() {
 		return direction;
 	}
+	public void setDirection(double d){
+		direction=d;
+	}
 
 	public double getSpeed() {
 		return speed;

@@ -11,6 +11,7 @@ public class LightningWizard extends Tower {
 
 	private class LightningBolt extends Bullet {
 		private Point targ;
+		private int chainCount = 0;
 
 		LightningBolt(double speed, double direction, int damage, Point start,
 				Tower t, Point target) {
@@ -20,12 +21,27 @@ public class LightningWizard extends Tower {
 
 		public void draw(Graphics g) {
 			g.setColor(Color.cyan);
-			g.drawLine((int) getPoint().getX()-1, (int) getPoint().getY()-1,
-					(int) targ.getX()-1, (int) targ.getY()-1);
+			g.drawLine((int) getPoint().getX() - 1,
+					(int) getPoint().getY() - 1, (int) targ.getX() - 1,
+					(int) targ.getY() - 1);
 			g.drawLine((int) getPoint().getX(), (int) getPoint().getY(),
 					(int) targ.getX(), (int) targ.getY());
-			g.drawLine((int) getPoint().getX()+1, (int) getPoint().getY()+1,
-					(int) targ.getX()+1, (int) targ.getY()+1);
+			g.drawLine((int) getPoint().getX() + 1,
+					(int) getPoint().getY() + 1, (int) targ.getX() + 1,
+					(int) targ.getY() + 1);
+		}
+
+		public void remove() {
+			if (chainCount < 3
+					&& getTower().getTarget(getTower().getPlayer().getBlobs()) != null) {
+				targ = getTower().getTarget(getTower().getPlayer().getBlobs())
+						.getPoint();
+
+				setDirection(getTower().getDirection(getPoint(), targ));
+				chainCount++;
+			} else {
+				getTower().getBullets().remove(this);
+			}
 		}
 
 	}
@@ -58,9 +74,10 @@ public class LightningWizard extends Tower {
 							* Math.sin(Math.PI * 3 / 2
 									+ (Math.PI * 2 / 5 * (i + 2)))));
 		}
-		if(zap){
+		if (zap) {
 			g.setColor(Color.BLACK);
-			g.drawString("ZAP!", (int)(sideLength*Math.random())+xStart, (int)(sideLength*Math.random())+yStart);
+			g.drawString("ZAP!", (int) (sideLength * Math.random()) + xStart,
+					(int) (sideLength * Math.random()) + yStart);
 		}
 		for (Bullet b : getBullets()) {
 			b.draw(g);

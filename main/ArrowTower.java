@@ -67,12 +67,12 @@ public class ArrowTower extends Tower {
 	}
 
 	public int getDamage() {
-		return 10;
+		return 7;
 	}
 
 	public void tick() {
 		tick++;
-		if (tick % 3 == 0) {
+		if (tick % 4 == 0) {
 			shoot();
 		}
 		for (int i = 0; i < getBullets().size(); i++) {
