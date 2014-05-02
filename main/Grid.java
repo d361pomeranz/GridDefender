@@ -6,7 +6,8 @@ import java.awt.Point;
 import java.util.ArrayList;
 
 public class Grid {
-
+	public int getXboxes(){return xBoxes;}
+	public int getYBoxes(){return yBoxes;}
 	ArrayList<Point> ps;
 	private int xBoxes = 32;
 	private int yBoxes = xBoxes / 16 * 9;
@@ -21,6 +22,7 @@ public class Grid {
 	private Player player;
 	private Player cPlayer;
 	private UI ui;
+	private int level=0;
 
 	public Grid(GameScreen gameScreen) {
 		this.gameScreen = gameScreen;
@@ -201,9 +203,11 @@ public class Grid {
 			}
 			b.tick();
 		}
-		if (ticks % 3 == 0 && ticks < 1200) {
+		if (ticks % 3 == 0) {
 			cBlobs.add(new Blob(200, (int) (Math.random() * 2) + 6, this, true));
 		}
+		
+		
 		for (int i = 0; i < ui.getTowers().size(); i++)
 			if (ui.getTowers().get(i).inPlay())
 				ui.getTowers().get(i).tick();
