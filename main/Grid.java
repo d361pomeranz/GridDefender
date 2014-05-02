@@ -21,6 +21,7 @@ public class Grid {
 	private Player player;
 	private Player cPlayer;
 	private UI ui;
+	private int level = 1;
 
 	public Grid(GameScreen gameScreen) {
 		this.gameScreen = gameScreen;
@@ -201,9 +202,15 @@ public class Grid {
 			}
 			b.tick();
 		}
-		if (ticks % 3 == 0 && ticks < 1200) {
-			cBlobs.add(new Blob(200, (int) (Math.random() * 2) + 6, this, true));
+
+		if (ticks == 600) {
+			level++;
+			ticks = -200;
 		}
+		if (ticks > 0)
+			if (ticks % (12 - level) == 0) {
+				cBlobs.add(new Blob(90 + 10 * level, level + 2, this, true));
+			}
 		for (int i = 0; i < ui.getTowers().size(); i++)
 			if (ui.getTowers().get(i).inPlay())
 				ui.getTowers().get(i).tick();
@@ -214,7 +221,6 @@ public class Grid {
 			if (cPlayer.getTowers().get(i).inPlay())
 				cPlayer.getTowers().get(i).tick();
 		player.tick();
-		
 		ticks++;
 
 	}
@@ -240,12 +246,16 @@ public class Grid {
 		for (Blob b : hBlobs)
 			b.draw(g);
 		ui.draw(g);
-		for (int i = 0; i < ui.getTowers().size(); i++)
-			if (ui.getTowers().get(i).inPlay())
-				ui.getTowers().get(i).draw(g);
+		g.drawString(level + "", 50, 50);
+		for (int i = 0; i < cPlayer.getTowers().size(); i++)
+			if (cPlayer.getTowers().get(i).inPlay())
+				cPlayer.getTowers().get(i).draw(g);
 		for (int i = 0; i < player.getTowers().size(); i++)
 			if (player.getTowers().get(i).inPlay())
 				player.getTowers().get(i).draw(g);
+		for (int i = 0; i < ui.getTowers().size(); i++)
+			if (ui.getTowers().get(i).inPlay())
+				ui.getTowers().get(i).draw(g);
 	}
 
 	public Base getHBase() {
