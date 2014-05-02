@@ -204,12 +204,12 @@ public class Grid {
 			b.tick();
 		}
 
-		if (ticks == 600) {
+		if (ticks == 150) {
 			level++;
-			ticks = -200;
+			ticks = -50;
 		}
 		if (ticks > 0)
-			if (ticks % (12 - level) == 0) {
+			if (ticks % (12 - (level/2)) == 0) {
 				cBlobs.add(new Blob(90 + 10 * level, level + 2, this, true));
 			}
 		

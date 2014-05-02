@@ -12,7 +12,7 @@ public class Base {
 	public Base(int x, int y){
 		this.x = x;
 		this.y = y;
-		health = 100;
+		health = 1000;
 	}
 	
 	public void damage(int n){
