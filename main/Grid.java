@@ -224,7 +224,12 @@ public class Grid {
 				cPlayer.getTowers().get(i).tick();
 		player.tick();
 		ticks++;
-
+		if(cBase.getHealth()<=0){
+			gameScreen.getFrame().switchScreen(new EndScreen(gameScreen.getFrame(),"You"));
+		}
+		if(hBase.getHealth()<=0){
+			gameScreen.getFrame().switchScreen(new EndScreen(gameScreen.getFrame(),"Computer"));
+		}
 	}
 
 	public void draw(Graphics g) {

@@ -19,6 +19,10 @@ public class Base {
 		health -= n;
 	}
 	
+	public int getHealth(){
+		return health;
+	}
+	
 	public void draw(Graphics g, int sideLength){
 		g.fillRect(sideLength * x + 8, sideLength * y + 8, sideLength - 14, sideLength - 14);
 		g.setColor(Color.black);
