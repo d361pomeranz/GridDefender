@@ -109,13 +109,13 @@ public class Blob {
 			p2 = new Point(grid.getCBase().getX() * grid.sideLength()
 					+ grid.sideLength() / 2, grid.getCBase().getY()
 					* grid.sideLength() + grid.sideLength() / 2);
-			if (p.distance(p2) < 20)
+			if (p.distance(p2) < 30)
 				return true;
 		} else {
 			p2 = new Point(grid.getHBase().getX() * grid.sideLength()
 					+ grid.sideLength() / 2, grid.getHBase().getY()
 					* grid.sideLength() + grid.sideLength() / 2);
-			if (p.distance(p2) < 20)
+			if (p.distance(p2) < 30)
 				return true;
 		}
 		return false;

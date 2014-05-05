@@ -61,7 +61,7 @@ public class SpikyTower extends Tower {
 	}
 
 	public int getDamage() {
-		return 15;
+		return 10;
 	}
 
 	public void tick() {
