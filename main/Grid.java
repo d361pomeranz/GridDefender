@@ -204,13 +204,14 @@ public class Grid {
 			b.tick();
 		}
 
-		if (ticks == 150) {
+		if (ticks == 500) {
 			level++;
-			ticks = -50;
+			ticks = -150;
 		}
 		if (ticks > 0)
 			if (ticks % (12 - (level/2)) == 0) {
-				cBlobs.add(new Blob(90 + 10 * level, level + 2, this, true));
+				cBlobs.add(new Blob(90 + 10 * level, level/2 + 3, this, true));
+				hBlobs.add(new Blob(90 + 10 * level, level/2 + 3, this, true));
 			}
 		
 		for (int i = 0; i < ui.getTowers().size(); i++)
@@ -223,6 +224,7 @@ public class Grid {
 			if (cPlayer.getTowers().get(i).inPlay())
 				cPlayer.getTowers().get(i).tick();
 		player.tick();
+		cPlayer.tick();
 		ticks++;
 		if(cBase.getHealth()<=0){
 			gameScreen.getFrame().switchScreen(new EndScreen(gameScreen.getFrame(),"You"));
