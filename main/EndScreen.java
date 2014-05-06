@@ -45,12 +45,13 @@ public class EndScreen extends GDScreen{
 	@Override
 	public void draw() {
 		Graphics g = getFrame().getBufferStrategy().getDrawGraphics();
-		g.drawString("This nigga "+name+" just won yo", 100, 100);
 		g.setColor(Color.gray);
 		g.fillRect(0, 0, getWidth(), getHeight());
+		g.drawString("This nigga "+name+" just won yo", 100, 100);
+		
 		
 	}
-
+	
 	@Override
 	public void tick() {
 		// TODO Auto-generated method stub
