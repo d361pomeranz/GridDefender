@@ -29,7 +29,7 @@ public class Grid {
 		sideLength = gameScreen.getWidth() / xBoxes;
 		dansGenerateRandomMaze();
 		placeBases();
-		cPlayer = new Player(this, hBlobs, cBlobs);
+		cPlayer = new ComputerPlayer(this, hBlobs, cBlobs);
 		player = new Player(this, cBlobs, hBlobs);
 		ui = new UI(player);
 	}
@@ -211,7 +211,7 @@ public class Grid {
 		if (ticks > 0)
 			if (ticks % (12 - (level/2)) == 0) {
 				cBlobs.add(new Blob(90 + 10 * level, level/2 + 3, this, true));
-				hBlobs.add(new Blob(90 + 10 * level, level/2 + 3, this, true));
+				hBlobs.add(new Blob(90 + 10 * level, level/2 + 3, this, false));
 			}
 		
 		for (int i = 0; i < ui.getTowers().size(); i++)
@@ -256,8 +256,11 @@ public class Grid {
 			b.draw(g);
 		g.drawString(level + "", 50, 50);
 		for (int i = 0; i < cPlayer.getTowers().size(); i++)
-			if (cPlayer.getTowers().get(i).inPlay())
+			if (cPlayer.getTowers().get(i).inPlay()){
 				cPlayer.getTowers().get(i).draw(g);
+				g.setColor(Color.red);
+				g.fillRect(cPlayer.getTowers().get(i).getX(), cPlayer.getTowers().get(i).getY(), 10, 10);
+			}
 		for (int i = 0; i < player.getTowers().size(); i++)
 			if (player.getTowers().get(i).inPlay())
 				player.getTowers().get(i).draw(g);
