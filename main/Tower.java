@@ -126,16 +126,16 @@ public abstract class Tower {
 	}
 
 	public void place(int x, int y) {
-		if (this instanceof RockTower &&player.getGold()>600) {
+		if (this instanceof RockTower &&player.getGold()>=600) {
 			player.addTower(new RockTower(player, player.getTowers().size(), x, y));
 			player.pay(600);
-		} else if (this instanceof SpikyTower&&player.getGold()>1000) {
+		} else if (this instanceof SpikyTower&&player.getGold()>=1000) {
 			player.addTower(new SpikyTower(player, player.getTowers().size(), x, y));
 			player.pay(1000);
-		} else if (this instanceof ArrowTower&&player.getGold()>800) {
+		} else if (this instanceof ArrowTower&&player.getGold()>=800) {
 			player.addTower(new ArrowTower(player, player.getTowers().size(), x, y));
 			player.pay(800);
-		} else if(player.getGold()>1200){
+		} else if(player.getGold()>=1200){
 			player.addTower(new LightningWizard(player, player.getTowers().size(), x, y));
 			player.pay(600);
 		}

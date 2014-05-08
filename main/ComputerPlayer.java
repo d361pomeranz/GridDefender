@@ -52,16 +52,16 @@ public class ComputerPlayer extends Player {
 
 	public void tick() {
 		tick++;
-		if (targ == 0 && getGold() > 600) {
+		if (targ == 0 && getGold() >= 600) {
 			placeTower(new RockTower(this, getTowers().size()));
 			targ = (int) (4 * Math.random());
-		} else if (targ == 1 && getGold() > 800) {
+		} else if (targ == 1 && getGold() >= 800) {
 			placeTower(new ArrowTower(this, getTowers().size()));
 			targ = (int) (4 * Math.random());
-		} else if (targ == 2 && getGold() >1000) {
+		} else if (targ == 2 && getGold() >=1000) {
 			placeTower(new SpikyTower(this, getTowers().size()));
 			targ = (int) (4 * Math.random());
-		} else if(targ == 3 && getGold()>1200){
+		} else if(targ == 3 && getGold()>=1200){
 			placeTower(new LightningWizard(this, getTowers().size()));
 			targ = (int) (4 * Math.random());
 		}

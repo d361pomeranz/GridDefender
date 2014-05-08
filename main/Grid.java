@@ -32,6 +32,7 @@ public class Grid {
 		cPlayer = new ComputerPlayer(this, hBlobs, cBlobs);
 		player = new Player(this, cBlobs, hBlobs);
 		ui = new UI(player);
+		cPlayer.tick();
 	}
 
 	public GameScreen getScreen() {
@@ -307,6 +308,9 @@ public class Grid {
 				if (py * sideLength == t.getY())
 					return false;
 		return true;
+	}
+	public Player getCPLayer() {
+		return cPlayer;
 	}
 
 }

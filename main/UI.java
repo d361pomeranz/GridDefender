@@ -95,7 +95,7 @@ public class UI {
 		g.setColor(Color.DARK_GRAY);
 		g.fillRect(x + grid.sideLength() * 4, y, grid.sideLength() / 2, grid.sideLength() / 2);
 		g.setColor(Color.YELLOW);
-		g.drawString("Gold: " + player.getGold(), x + 2, y + 15);
+		g.drawString("Gold: " + player.getGold() + "vs. " + grid.getCPLayer().getGold(), x + 2, y + 15);
 
 	}
 

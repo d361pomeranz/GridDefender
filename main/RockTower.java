@@ -62,11 +62,11 @@ public class RockTower extends Tower {
 	}
 
 	public int getRange() {
-		return 125;
+		return 145;
 	}
 
 	public int getDamage() {
-		return 20;
+		return 24;
 	}
 
 	public double getSpeed() {
