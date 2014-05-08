@@ -56,12 +56,6 @@ public class RockTower extends Tower {
 		g.fillRect(xStart, yStart, sideLength, sideLength);
 		g.setColor(new Color(130, 118, 109));
 		g.fillOval(xStart + 5, yStart + 5, sideLength - 10, sideLength - 10);
-		if (inPlay()) {
-			g.setColor(Color.cyan);
-			g.drawOval((int) (getPoint().getX() - getRange()),
-					(int) (getPoint().getY() - getRange()), getRange() * 2,
-					getRange() * 2);
-		}
 		for (int i = 0; i < getBullets().size(); i++) {
 			getBullets().get(i).draw(g);
 		}

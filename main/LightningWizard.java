@@ -30,9 +30,18 @@ public class LightningWizard extends Tower {
 					(int) getPoint().getY() + 1, (int) targ.getX() + 1,
 					(int) targ.getY() + 1);
 		}
+		public void tick(){
+			Point newPoint=new Point();
+			newPoint.setLocation(targ);
+			setPoint(newPoint);
+			checkCollision(getTower().getPlayer().getBlobs());
+			if(getPoint().distance(getTower().getPoint())>getTower().getRange()){
+				remove();
+			}
+		}
 
 		public void remove() {
-			if (chainCount < 3
+			if (chainCount < 5
 					&& getTower().getTarget(getTower().getPlayer().getBlobs()) != null) {
 				targ = getTower().getTarget(getTower().getPlayer().getBlobs())
 						.getPoint();
@@ -103,7 +112,7 @@ public class LightningWizard extends Tower {
 	}
 
 	public int getDamage() {
-		return 25;
+		return 45;
 	}
 
 	public void tick() {
@@ -120,6 +129,6 @@ public class LightningWizard extends Tower {
 	}
 
 	public double getSpeed() {
-		return 50;
+		return 5;
 	}
 }
