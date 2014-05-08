@@ -254,7 +254,6 @@ public class Grid {
 			b.draw(g);
 		for (Blob b : hBlobs)
 			b.draw(g);
-		ui.draw(g);
 		g.drawString(level + "", 50, 50);
 		for (int i = 0; i < cPlayer.getTowers().size(); i++)
 			if (cPlayer.getTowers().get(i).inPlay())
@@ -265,6 +264,7 @@ public class Grid {
 		for (int i = 0; i < ui.getTowers().size(); i++)
 			if (ui.getTowers().get(i).inPlay())
 				ui.getTowers().get(i).draw(g);
+		ui.draw(g);
 	}
 
 	public Base getHBase() {
