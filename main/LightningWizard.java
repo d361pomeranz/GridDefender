@@ -8,7 +8,6 @@ public class LightningWizard extends Tower {
 	private double direction = Math.PI / 2;
 	private int tick = 0;
 	private boolean zap = false;
-
 	private class LightningBolt extends Bullet {
 		private Point targ;
 		private int chainCount = 0;
@@ -104,6 +103,7 @@ public class LightningWizard extends Tower {
 			getBullets().add(
 					new LightningBolt(getSpeed(), direction, getDamage(),
 							getPoint(), this, closest.getPoint()));
+			zap=true;
 		}
 	}
 
@@ -119,7 +119,6 @@ public class LightningWizard extends Tower {
 		tick++;
 		if (tick % 15 == 0) {
 			shoot();
-			zap = true;
 		} else if (tick % 15 == 5) {
 			zap = false;
 		}
