@@ -261,6 +261,9 @@ public class Grid {
 				cPlayer.getTowers().get(i).draw(g);
 				g.setColor(Color.red);
 				g.fillRect(cPlayer.getTowers().get(i).getX(), cPlayer.getTowers().get(i).getY(), 10, 10);
+				g.fillRect(cPlayer.getTowers().get(i).getX()+sideLength()-10, cPlayer.getTowers().get(i).getY(), 10, 10);
+				g.fillRect(cPlayer.getTowers().get(i).getX(), cPlayer.getTowers().get(i).getY()+sideLength()-10, 10, 10);
+				g.fillRect(cPlayer.getTowers().get(i).getX()+sideLength()-10, cPlayer.getTowers().get(i).getY()+sideLength()-10, 10, 10);
 			}
 		for (int i = 0; i < player.getTowers().size(); i++)
 			if (player.getTowers().get(i).inPlay())
