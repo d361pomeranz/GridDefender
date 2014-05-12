@@ -242,11 +242,7 @@ public class Grid {
 				if (maze[x][y] == true)
 					g.fillRect(sideLength * x, sideLength * y, sideLength,
 							sideLength);
-		g.setColor(Color.BLUE);
-		for (int x = 0; x <= xBoxes; x++)
-			g.drawLine(x * sideLength, 0, x * sideLength, sideLength * yBoxes);
-		for (int y = 0; y <= yBoxes; y++)
-			g.drawLine(0, y * sideLength, sideLength * xBoxes, y * sideLength);
+		
 		g.setColor(Color.red);
 		hBase.draw(g, sideLength);
 		g.setColor(Color.blue);
@@ -268,6 +264,12 @@ public class Grid {
 		for (int i = 0; i < ui.getTowers().size(); i++)
 			if (ui.getTowers().get(i).inPlay())
 				ui.getTowers().get(i).draw(g);
+		
+		g.setColor(Color.BLUE);
+		for (int x = 0; x <= xBoxes; x++)
+			g.drawLine(x * sideLength, 0, x * sideLength, sideLength * yBoxes);
+		for (int y = 0; y <= yBoxes; y++)
+			g.drawLine(0, y * sideLength, sideLength * xBoxes, y * sideLength);
 		ui.draw(g);
 	}
 
