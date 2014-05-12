@@ -312,6 +312,10 @@ public class Grid {
 			if (px * sideLength == t.getX())
 				if (py * sideLength == t.getY())
 					return false;
+		for (Tower t : cPlayer.getTowers())
+			if (px * sideLength == t.getX())
+				if (py * sideLength == t.getY())
+					return false;
 		return true;
 	}
 	public Player getCPLayer() {

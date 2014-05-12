@@ -35,6 +35,18 @@ public class ComputerPlayer extends Player {
 				if (getGrid().getMaze()[x][y]) {
 					bueno[x][y] -= 100;
 				}
+				for (int i = 0; i < grid.getXboxes(); i++) {
+					zero.add(new Point(i, 0));
+					zero.add(new Point(i, grid.getXboxes() - 1));
+				}
+				for (int i = 0; i < grid.getXboxes(); i++) {
+					bueno[i][0] = -1;
+					bueno[i][grid.getYBoxes()-1] = -1;
+				}
+				for (int i = 0; i < grid.getYBoxes(); i++) {
+					bueno[0][i] = -1;
+					bueno[grid.getXboxes() - 1][i] = -1;
+				}
 				if (bueno[x][y] == 3) {
 					high.add(new Point(x, y));
 				} else if (bueno[x][y] == 2) {
@@ -46,6 +58,7 @@ public class ComputerPlayer extends Player {
 				}
 			}
 		}
+
 		targ = (int) (4 * Math.random());
 
 	}
@@ -58,10 +71,10 @@ public class ComputerPlayer extends Player {
 		} else if (targ == 1 && getGold() >= 800) {
 			placeTower(new ArrowTower(this, getTowers().size()));
 			targ = (int) (4 * Math.random());
-		} else if (targ == 2 && getGold() >=1000) {
+		} else if (targ == 2 && getGold() >= 1000) {
 			placeTower(new SpikyTower(this, getTowers().size()));
 			targ = (int) (4 * Math.random());
-		} else if(targ == 3 && getGold()>=1200){
+		} else if (targ == 3 && getGold() >= 1200) {
 			placeTower(new LightningWizard(this, getTowers().size()));
 			targ = (int) (4 * Math.random());
 		}
