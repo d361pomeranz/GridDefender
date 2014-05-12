@@ -94,7 +94,10 @@ public class ComputerPlayer extends Player {
 		} else {
 			p = zero.remove((int) (zero.size() * Math.random()));
 		}
-		t.place((int) p.getX(), (int) p.getY());
+		if(getGrid().canBePlaced((int)(p.getX()/getGrid().sideLength()), (int)(p.getY()/getGrid().sideLength()))){
+			t.place((int) p.getX(), (int) p.getY());
+		}
+		
 	}
 
 }
