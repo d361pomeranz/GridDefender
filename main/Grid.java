@@ -210,9 +210,9 @@ public class Grid {
 			ticks = -150;
 		}
 		if (ticks > 0)
-			if (ticks % (12 - (level/2)) == 0) {
-				cBlobs.add(new Blob(90 + 10 * level, level/2 + 3, this, true));
-				hBlobs.add(new Blob(90 + 10 * level, level/2 + 3, this, false));
+			if (ticks % (18 - (level/3)) == 0) {
+				cBlobs.add(new Blob(90 + 17 * level, level/3 + 6, this, true));
+				hBlobs.add(new Blob(90 + 17 * level, level/3 + 6, this, false));
 			}
 		
 		for (int i = 0; i < ui.getTowers().size(); i++)
@@ -309,12 +309,12 @@ public class Grid {
 		if (maze[px][py])
 			return false;
 		for (Tower t : player.getTowers())
-			if (px * sideLength == t.getX())
-				if (py * sideLength == t.getY())
+			if (Math.abs(px * sideLength - t.getX()) < 5)
+				if (Math.abs(py * sideLength - t.getY()) < 5)
 					return false;
 		for (Tower t : cPlayer.getTowers())
-			if (px * sideLength == t.getX())
-				if (py * sideLength == t.getY())
+			if (Math.abs(px * sideLength - t.getX()) < 5)
+				if (Math.abs(py * sideLength - t.getY()) < 5)
 					return false;
 		return true;
 	}

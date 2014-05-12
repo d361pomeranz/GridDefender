@@ -71,7 +71,7 @@ public class ArrowTower extends Tower {
 	}
 
 	public int getDamage() {
-		return 29;
+		return 36;
 	}
 
 	public void tick() {

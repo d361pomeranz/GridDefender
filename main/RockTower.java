@@ -31,7 +31,7 @@ public class RockTower extends Tower {
 
 	public void tick() {
 		tick++;
-		if (tick % 4 == 0) {
+		if (tick % 5 == 0) {
 			shoot();
 		}
 		for (int i = 0; i < getBullets().size(); i++) {

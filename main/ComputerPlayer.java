@@ -41,7 +41,7 @@ public class ComputerPlayer extends Player {
 				}
 				for (int i = 0; i < grid.getXboxes(); i++) {
 					bueno[i][0] = -1;
-					bueno[i][grid.getYBoxes()-1] = -1;
+					bueno[i][grid.getYBoxes() - 1] = -1;
 				}
 				for (int i = 0; i < grid.getYBoxes(); i++) {
 					bueno[0][i] = -1;
@@ -94,10 +94,11 @@ public class ComputerPlayer extends Player {
 		} else {
 			p = zero.remove((int) (zero.size() * Math.random()));
 		}
-		if(getGrid().canBePlaced((int)(p.getX()/getGrid().sideLength()), (int)(p.getY()/getGrid().sideLength()))){
+		if (getGrid().canBePlaced((int) (p.getX()),
+				(int) (p.getY()))) {
 			t.place((int) p.getX(), (int) p.getY());
 		}
-		
+
 	}
 
 }
