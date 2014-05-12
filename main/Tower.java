@@ -137,7 +137,7 @@ public abstract class Tower {
 			player.pay(800);
 		} else if(player.getGold()>=1200){
 			player.addTower(new LightningWizard(player, player.getTowers().size(), x, y));
-			player.pay(600);
+			player.pay(1200);
 		}
 		clicked = false;
 	}
