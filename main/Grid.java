@@ -191,7 +191,7 @@ public class Grid {
 		for (Blob b : cBlobs) {
 			if (b.touchesBase()) {
 				cBlobs.remove(b);
-				hBase.damage(10);
+				hBase.damage(20);
 				return;
 			}
 			b.tick();
@@ -199,7 +199,7 @@ public class Grid {
 		for (Blob b : hBlobs) {
 			if (b.touchesBase()) {
 				hBlobs.remove(b);
-				cBase.damage(10);
+				cBase.damage(20);
 				return;
 			}
 			b.tick();
