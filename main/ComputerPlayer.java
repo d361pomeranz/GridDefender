@@ -14,6 +14,7 @@ public class ComputerPlayer extends Player {
 
 	public ComputerPlayer(Grid grid, ArrayList<Blob> e, ArrayList<Blob> p) {
 		super(grid, e, p);
+		pay(-600);
 		bueno = new int[getGrid().getXboxes()][getGrid().getYBoxes()];
 		for (int x = 0; x < getGrid().getXboxes(); x++) {
 			for (int y = 0; y < getGrid().getYBoxes(); y++) {

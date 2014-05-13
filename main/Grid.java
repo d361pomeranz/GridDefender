@@ -35,10 +35,15 @@ public class Grid {
 		cPlayer.tick();
 		cPlayer.tick();
 		cPlayer.tick();
+		cPlayer.tick();
 	}
 
 	public GameScreen getScreen() {
 		return gameScreen;
+	}
+	
+	public int getLevel(){
+		return level;
 	}
 
 	private void dansGenerateRandomMaze() {
@@ -61,7 +66,7 @@ public class Grid {
 			noBueno[2][i] = true;
 			noBueno[xBoxes - 3][i] = true;
 		}
-		int turnNum = (int) (Math.random() * 11) + 1;
+		int turnNum = (int) (Math.random() * 6) + 5;
 		Point[] turns = new Point[turnNum];
 		int turnCount = 0;
 		while (turnCount < turnNum) {
@@ -212,9 +217,9 @@ public class Grid {
 			ticks = -150;
 		}
 		if (ticks > 0)
-			if (ticks % (12 - (level/4)) == 0) {
-				cBlobs.add(new Blob(90 + 14 * level, level/2 + 6, this, true));
-				hBlobs.add(new Blob(90 + 14 * level, level/2 + 6, this, false));
+			if (ticks % (10 - (level/5)) == 0) {
+				cBlobs.add(new Blob(90 + 18 * level, level/3 + 6, this, true));
+				hBlobs.add(new Blob(90 + 18 * level, level/3 + 6, this, false));
 			}
 		
 		for (int i = 0; i < ui.getTowers().size(); i++)
@@ -253,7 +258,6 @@ public class Grid {
 			b.draw(g);
 		for (Blob b : hBlobs)
 			b.draw(g);
-		g.drawString(level + "", 50, 50);
 		for (int i = 0; i < cPlayer.getTowers().size(); i++)
 			if (cPlayer.getTowers().get(i).inPlay()){
 				cPlayer.getTowers().get(i).draw(g);

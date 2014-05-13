@@ -120,7 +120,7 @@ public class LightningWizard extends Tower {
 	}
 
 	public int getDamage() {
-		return 45;
+		return 35;
 	}
 
 	public void tick() {

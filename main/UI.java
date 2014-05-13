@@ -29,10 +29,10 @@ public class UI {
 
 	public void alter() {
 		if (open)
-			for (int i = 0; i < towers.size(); i++) 
+			for (int i = 0; i < towers.size(); i++)
 				towers.get(i).setClick(false);
 		open = !open;
-			
+
 	}
 
 	public boolean onBox(Point p) {
@@ -81,7 +81,8 @@ public class UI {
 	public void draw(Graphics g) {
 		if (open) {
 			g.setColor(Color.LIGHT_GRAY);
-			g.fillRect(x, y, (int) (grid.sideLength() * 4.5), (int) (grid.sideLength() * 2.5));
+			g.fillRect(x, y, (int) (grid.sideLength() * 4.5),
+					(int) (grid.sideLength() * 2.5));
 			for (int i = 0; i < towers.size(); i++)
 				if (towers.get(i).inPlay() == false) {
 					if (towers.get(i).clicked())
@@ -93,9 +94,18 @@ public class UI {
 		g.setColor(Color.GRAY);
 		g.fillRect(x, y, (int) (grid.sideLength() * 4.5), grid.sideLength() / 2);
 		g.setColor(Color.DARK_GRAY);
-		g.fillRect(x + grid.sideLength() * 4, y, grid.sideLength() / 2, grid.sideLength() / 2);
+		g.fillRect(x + grid.sideLength() * 4, y, grid.sideLength() / 2,
+				grid.sideLength() / 2);
 		g.setColor(Color.YELLOW);
-		g.drawString("Gold: Player - " + player.getGold() + " CPU - " + grid.getCPLayer().getGold(), x + 2, y + 15);
+		g.drawString("Gold: " + player.getGold(), x + 2, y + 15);
+		if (open) {
+			g.setColor(Color.black);
+			g.drawString("   1200         800        1000        600 ", x + 2,
+					y + 85);
+			g.drawString("Lightning / Arrow  /   Spike   /   Rock", x + 2, y + 100);
+		}
+		g.setColor(Color.white);
+		g.drawString("Level: " + grid.getLevel(), x + 120, y + 15);
 
 	}
 
