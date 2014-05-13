@@ -17,9 +17,9 @@ public class EndScreen extends GDScreen{
 		exitButton.setTextColor(Color.white);
 	}
 
-	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		if (exitButton.onButton(getMouse()))
+			System.exit(0);
 		
 	}
 
@@ -54,7 +54,7 @@ public class EndScreen extends GDScreen{
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(Color.black);
 		g.setFont(new Font("Impact", 64, 32));
-		g.drawString("This nigga "+name+" just won yo", 100, 100);
+		g.drawString(name+" Won!", getFrame().getWidth()/2,getFrame().getHeight()/2);
 		exitButton.draw(g);
 		
 		
