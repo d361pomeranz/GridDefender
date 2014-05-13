@@ -81,7 +81,7 @@ public class UI {
 	public void draw(Graphics g) {
 		if (open) {
 			g.setColor(Color.LIGHT_GRAY);
-			g.fillRect(x, y, (int) (grid.sideLength() * 4.5), (int) (grid.sideLength() * 4.5));
+			g.fillRect(x, y, (int) (grid.sideLength() * 4.5), (int) (grid.sideLength() * 2.5));
 			for (int i = 0; i < towers.size(); i++)
 				if (towers.get(i).inPlay() == false) {
 					if (towers.get(i).clicked())
@@ -101,7 +101,7 @@ public class UI {
 
 	public boolean on(Point p) {
 		if (p.getX() > x && p.getX() < x + (int) (grid.sideLength() * 4.5))
-			if (p.getY() > y && p.getY() < y + (int) (grid.sideLength() * 4.5))
+			if (p.getY() > y && p.getY() < y + (int) (grid.sideLength() * 2.5))
 				return true;
 		return false;
 	}

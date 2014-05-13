@@ -8,14 +8,19 @@ public class LightningWizard extends Tower {
 	private double direction = Math.PI / 2;
 	private int tick = 0;
 	private boolean zap = false;
+
 	private class LightningBolt extends Bullet {
 		private Point targ;
 		private int chainCount = 0;
+		private int tx;
+		private int ty;
 
 		LightningBolt(double speed, double direction, int damage, Point start,
 				Tower t, Point target) {
 			super(speed, direction, damage, false, 0, start, t);
 			targ = target;
+			tx = (int) start.getX();
+			ty = (int) start.getY();
 		}
 
 		public void draw(Graphics g) {
@@ -28,13 +33,16 @@ public class LightningWizard extends Tower {
 			g.drawLine((int) getPoint().getX() + 1,
 					(int) getPoint().getY() + 1, (int) targ.getX() + 1,
 					(int) targ.getY() + 1);
+			g.drawLine(tx, ty, (int) targ.getX(), (int) targ.getY());
 		}
-		public void tick(){
-			Point newPoint=new Point();
+
+		public void tick() {
+			Point newPoint = new Point();
 			newPoint.setLocation(targ);
 			setPoint(newPoint);
 			checkCollision(getTower().getPlayer().getBlobs());
-			if(getPoint().distance(getTower().getPoint())>getTower().getRange()){
+			if (getPoint().distance(getTower().getPoint()) > getTower()
+					.getRange()) {
 				remove();
 			}
 		}
@@ -57,7 +65,7 @@ public class LightningWizard extends Tower {
 	LightningWizard(Player p, int ti) {
 		super(p, ti);
 	}
-	
+
 	LightningWizard(Player p, int ti, int x, int y) {
 		super(p, ti, x, y);
 	}
@@ -103,7 +111,7 @@ public class LightningWizard extends Tower {
 			getBullets().add(
 					new LightningBolt(getSpeed(), direction, getDamage(),
 							getPoint(), this, closest.getPoint()));
-			zap=true;
+			zap = true;
 		}
 	}
 

@@ -33,6 +33,8 @@ public class Grid {
 		player = new Player(this, cBlobs, hBlobs);
 		ui = new UI(player);
 		cPlayer.tick();
+		cPlayer.tick();
+		cPlayer.tick();
 	}
 
 	public GameScreen getScreen() {
@@ -210,9 +212,9 @@ public class Grid {
 			ticks = -150;
 		}
 		if (ticks > 0)
-			if (ticks % (18 - (level/3)) == 0) {
-				cBlobs.add(new Blob(90 + 17 * level, level/3 + 6, this, true));
-				hBlobs.add(new Blob(90 + 17 * level, level/3 + 6, this, false));
+			if (ticks % (12 - (level/4)) == 0) {
+				cBlobs.add(new Blob(90 + 14 * level, level/2 + 6, this, true));
+				hBlobs.add(new Blob(90 + 14 * level, level/2 + 6, this, false));
 			}
 		
 		for (int i = 0; i < ui.getTowers().size(); i++)
