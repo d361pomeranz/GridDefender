@@ -26,9 +26,7 @@ public class Player {
 	public void tick() {
 		for (int i = 0; i < getBlobs().size(); i++) {
 			if (getBlobs().get(i).getHealth() <= 0) {
-				gold += 10;
-				if (this instanceof ComputerPlayer)
-					gold +=3;
+				gold += 8;
 				getBlobs().remove(i);
 			}
 		}

@@ -33,7 +33,8 @@ public class LightningWizard extends Tower {
 			g.drawLine((int) getPoint().getX() + 1,
 					(int) getPoint().getY() + 1, (int) targ.getX() + 1,
 					(int) targ.getY() + 1);
-			g.drawLine(tx, ty, (int) targ.getX(), (int) targ.getY());
+			if (zap)
+				g.drawLine(tx, ty, (int) targ.getX(), (int) targ.getY());
 		}
 
 		public void tick() {
@@ -120,7 +121,7 @@ public class LightningWizard extends Tower {
 	}
 
 	public int getDamage() {
-		return 35;
+		return 29;
 	}
 
 	public void tick() {

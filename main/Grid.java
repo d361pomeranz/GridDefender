@@ -218,8 +218,8 @@ public class Grid {
 		}
 		if (ticks > 0)
 			if (ticks % (10 - (level/5)) == 0) {
-				cBlobs.add(new Blob(90 + 18 * level, level/3 + 6, this, true));
-				hBlobs.add(new Blob(90 + 18 * level, level/3 + 6, this, false));
+				cBlobs.add(new Blob(90 + 18 * level, level/5 + 6, this, true));
+				hBlobs.add(new Blob(90 + 18 * level, level/5 + 6, this, false));
 			}
 		
 		for (int i = 0; i < ui.getTowers().size(); i++)

@@ -13,7 +13,7 @@ public class GDFrame extends Frame implements Runnable {
 	private int height = width * 9 / 16;
 	private GDScreen currentScreen;
 	private Thread thread;
-	private int fps = 30;
+	private int fps = 60;
 	private long lastTime = System.currentTimeMillis();
 
 	public GDFrame() {
