@@ -27,6 +27,8 @@ public class Player {
 		for (int i = 0; i < getBlobs().size(); i++) {
 			if (getBlobs().get(i).getHealth() <= 0) {
 				gold += 8;
+				if (this instanceof ComputerPlayer)
+					gold -= 2;
 				getBlobs().remove(i);
 			}
 		}
